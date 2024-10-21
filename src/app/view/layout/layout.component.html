@@ -1,0 +1,54 @@
+<div class="authorized-container page bg">
+  <div
+    class="row header"
+    style="height: 80px"
+    layout="row"
+    layout-align="space-between center"
+  >
+    <img style="height: 100%" src="/assets/icons/logo_blue.svg" />
+    <div class="col menuHolder" layout="row" layout-align="center center">
+      <div class="displayPicture" layout="row" layout-align="center center">
+      </div>
+
+      <div class="col desktop">
+        <div
+          class="col"
+          style="margin: 0px 15px"
+          layout="column"
+          layout-align="center start"
+        >
+          <h3 class="fw500 heading textPC"></h3>
+          <h5 class="fw500 fs10 label secColor" style="margin-top: 3px"></h5>
+        </div>
+      </div>
+
+      <img
+        class="pt"
+        src="/assets/icons/arrow_down.svg"
+        (click)="showMenu = !showMenu"
+      />
+    </div>
+
+    <div
+      class="personaMenuOverlay"
+      *ngIf="showMenu"
+      (click)="showMenu = !showMenu"
+    >
+      <div class="personaMenu">
+        <div
+          class="row menuItem"
+          layout="row"
+          layout-align="start center"
+          (click)="logOut()"
+        >
+          <img src="/assets/icons/off.svg" />
+          <h5 class="tabText">Log Out</h5>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <ng-content />
+</div>
+
+

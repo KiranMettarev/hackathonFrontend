@@ -1,0 +1,92 @@
+<div class="page mainDiv">
+  <div class="col leftCol" style="padding: 50px; background-color: var(--pc)">
+    <img class="logo" src="/assets/icons/logo_yellow.svg" />
+  </div>
+
+  <div
+    class="col rightCol"
+    style="background-color: var(--bg)"
+    layout="column"
+    layout-align="center center"
+  >
+    <form class="row" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!otpSent">
+      <div class="row" layout="column" layout-align="start start">
+        <h5 class="loginHeading heading">Log In</h5>
+        <div
+          class="row mt30"
+          layout="column"
+          layout-align="start start"
+        >
+          <label class="label fw500 textMuted" style="margin-bottom: 5px"
+            >Mobile Number</label
+          >
+          <input
+            class="textInput label h43"
+            (input)="onInputChange()"
+            formControlName="mobileNumber"
+            type="text"
+            maxlength="10"
+            placeholder="Enter Mobile Number"
+            [class.errInput]="mobileNumberErrFlg"
+          />
+
+          <div *ngIf="form.touched && form.invalid && isSubmited">
+            <small
+              *ngIf="form.controls.mobileNumber.errors?.['required']"
+              class="errorMsg"
+              >Mobile Number is required.</small
+            >
+            <small
+              *ngIf="
+                form.controls.mobileNumber.errors?.['invalidEmail'] &&
+                !form.controls.mobileNumber.errors?.['required']
+              "
+              class="errorMsg"
+              >Invalid mobileNumber format.</small
+            >
+          </div>
+        </div>
+      </div>
+      <button
+        class="button label fw600 h41"
+        style="margin-top: 30px; border-radius: 50px;"
+        [disabled]="form.invalid"
+      >
+       Continue
+      </button>
+    </form>
+
+    <form
+        *ngIf="otpSent"
+      >
+        <div class="row mt20" layout="column" layout-align="start start">
+          <div class="row" layout="row" layout-align="start center">
+            <img class="pt" src="/assets/icons/back_blue.svg" (click)="backStep()" />
+            <h5 class="loginHeading heading">OTP Verification</h5>
+          </div>
+          <div class="row" layout="column" layout-align="start start">
+             <p class="textMuted label fw400 mt30">
+            We have sent you a 4 digit code on your phone number <span>{{credential.mobileNumber}}</span>. Please enter it below.
+          </p>
+            <div class="row mt30" layout="row" layout-align="center center">
+              <ng-otp-input (onInputChange)="handleOtpChange($event)"
+          [config]="{length:4, placeholder:'-'}"></ng-otp-input></div>
+            
+            <button
+              type="submit"
+              class="button mt30"
+              style="border-radius: 50px;"
+              (click)="verifyAndFetchDetails()"
+            >
+              Verify OTP
+            </button>
+           <div class="row mt30" layout="column" layout-align="start start">
+            <h5 class="textMuted label fw600">Didn't receive a code?</h5>
+            <h5 class="mt10 primColor label fw600">Resend OTP</h5>
+           </div>
+          </div>
+        </div>
+      </form>
+
+  </div>
+</div>

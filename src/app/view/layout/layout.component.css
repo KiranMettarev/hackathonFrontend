@@ -1,0 +1,94 @@
+.header {
+  background: var(--white);
+  padding: 17px 20px;
+  height: 80px;
+  box-shadow: 0px 4px 16px 2px rgba(0, 0, 0, 0.06);
+}
+
+.menuHolder a {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #003366;
+  text-decoration: none;
+  opacity: 70%;
+  padding: 0px 15px;
+  cursor: pointer;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1.5px;
+}
+
+.displayPicture {
+  background-color: #f5f3eb;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  color: var(--pc);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.personaMenu {
+  position: fixed;
+  top: 50px;
+  right: 15px;
+  padding: 10px 4px;
+  width: 249px;
+  height: auto;
+  background: var(--white);
+  box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+.menuItem {
+  padding: 5px 10px;
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+}
+
+.menuItem h5 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #88959c;
+  margin-left: 10px;
+}
+
+.bg {
+  background-color: #f5f3eb;
+}
+
+@media screen and (min-width: 0px) and (max-width: 1000px) {
+  .mobile {
+    display: block !important;
+  }
+  .desktop {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 1001px) {
+  .mobile {
+    display: none !important;
+  }
+  .desktop {
+    display: block !important;
+  }
+}
+
+@media (min-width: 750px) and (min-height: 1000px) {
+  .tabText {
+    font-size: 20px !important;
+  }
+}
+
+.personaMenuOverlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+}
