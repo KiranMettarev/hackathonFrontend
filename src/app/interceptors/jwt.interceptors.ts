@@ -18,48 +18,68 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   return enrichWithAccessToken(authService, req, next);
 };
-export const unauthErrorInterceptor: HttpInterceptorFn = (
-  req: HttpRequest<unknown>,
-  next: HttpHandlerFn,
-): Observable<HttpEvent<unknown>> => {
-  const authService: AuthService = inject(AuthService);
+// export const unauthErrorInterceptor: HttpInterceptorFn = (
+//   req: HttpRequest<unknown>,
+//   next: HttpHandlerFn,
+// ): Observable<HttpEvent<unknown>> => {
+//   const authService: AuthService = inject(AuthService);
 
-  return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      if (
-        error instanceof HttpErrorResponse &&
-        // this will avoid an infinite loop when the accessToken expires.
-        !(req.url.includes("/otp/authenticate") || req.url.includes("/refresh") || req.url.includes("/otp/generateOtp")) &&
-        error.status === 401
-      ) {
-        return authService
-          .refreshToken()
-          .pipe(
-            switchMap((_it) => enrichWithAccessToken(authService, req, next)),
-          );
-      }
+//   return next(req).pipe(
+//     catchError((error: HttpErrorResponse) => {
+//       if (
+//         error instanceof HttpErrorResponse &&
+//         // this will avoid an infinite loop when the accessToken expires.
+//         !(req.url.includes("/otp/authenticate") || req.url.includes("/refresh") || req.url.includes("/otp/generateOtp")) &&
+//         error.status === 401
+//       ) {
+//         return authService
+//           .refreshToken()
+//           .pipe(
+//             switchMap((_it) => enrichWithAccessToken(authService, req, next)),
+//           );
+//       }
 
-      return throwError(() => error);
-    }),
-  );
-};
+//       return throwError(() => error);
+//     }),
+//   );
+// };
+
+// -------------------------------
+// function enrichWithAccessToken(
+//   authService: AuthService,
+//   req: HttpRequest<unknown>,
+//   next: HttpHandlerFn,
+// ): Observable<HttpEvent<unknown>> {
+//   return authService
+//     .currentLoggedInUser()
+//     .pipe(map((userState) => userState.tokens.accessToken))
+//     .pipe(
+//       map((accessToken) =>
+//         req.clone({
+//           setHeaders: {
+//             authorization: `Bearer ${accessToken}`,
+//           },
+//         }),
+//       ),
+//     )
+//     .pipe(switchMap((req) => next(req)));
+// }
 
 function enrichWithAccessToken(
   authService: AuthService,
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> {
-  return authService
-    .currentLoggedInUser()
-    .pipe(map((userState) => userState.tokens.accessToken))
-    .pipe(
-      map((accessToken) =>
-        req.clone({
-          setHeaders: {
-            authorization: `Bearer ${accessToken}`,
-          },
-        }),
-      ),
-    )
-    .pipe(switchMap((req) => next(req)));
+  // Get the stored access token from authService
+  const accessToken = authService.getAccessToken();
+
+  // Clone the request with the Authorization header
+  const clonedRequest = req.clone({
+    setHeaders: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  // Pass the cloned request to the next handler
+  return next(clonedRequest);
 }

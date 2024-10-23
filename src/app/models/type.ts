@@ -6,3 +6,9 @@ export type DocRequest = {
   otp?: string;
   mobileNumber?: string;
 };
+
+export enum BlockStatus {
+  inProgress = "inProgress",
+  accepted = "accepted",
+  rejected = "rejected",
+}

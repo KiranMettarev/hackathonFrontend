@@ -11,11 +11,13 @@ import { HomeComponent } from "./view/home/home.component";
 import { LayoutComponent } from "./view/layout/layout.component";
 import { AppRoutingModule } from "./app.routes";
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from "@angular/common/http";
-import { jwtInterceptor, unauthErrorInterceptor } from "./interceptors/jwt.interceptors";
+import { jwtInterceptor,  } from "./interceptors/jwt.interceptors";
 import { LoadingComponent } from "./view/generic/loading/loading.component";
 import { AadharComponent } from "./view/KYC/aadhar/aadhar.component";
 import { PanComponent } from "./view/KYC/pan/pan.component";
 import { BillComponent } from "./view/KYC/bill/bill.component";
+import { AaIntegrationComponent } from "./view/bank/aa-integration/aa-integration.component";
+import { UploadComponent } from "./view/generic/upload/upload.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { BillComponent } from "./view/KYC/bill/bill.component";
     LoadingComponent,
     AadharComponent,
     PanComponent,
-    BillComponent
+    BillComponent,
+    AaIntegrationComponent,
+    UploadComponent
   ],
 
   bootstrap: [AppComponent],
@@ -41,7 +45,8 @@ import { BillComponent } from "./view/KYC/bill/bill.component";
    providers: [
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([jwtInterceptor, unauthErrorInterceptor]),
+      // withInterceptors([jwtInterceptor, unauthErrorInterceptor]),
+      withInterceptors([jwtInterceptor,]),
     ),
     provideHttpClient(withInterceptorsFromDi()),
   ],

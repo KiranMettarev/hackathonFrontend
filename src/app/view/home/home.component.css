@@ -2,8 +2,8 @@
   height: 42px;
 }
 
-.h173{
-  height: 173px;
+.h155{
+  height: 155px;
 }
 
 .labelPadding{
@@ -11,9 +11,9 @@
 }
 
 button{
-  width: 176px;
-  height: 43px;
-  background: var(--Schemes-On-Primary-Container, #4F378A);
+  width: 132px;
+  height: 40px;
+  background: #4F378A;
   color: #ffffff;
 }
 
@@ -32,4 +32,17 @@ button{
 
 .blur{
   opacity: 0.3;
+}
+
+.card{
+  background: var(--White, #FFFFFF);
+}
+
+.uploadBtn {
+  background-color: var(--white);
+  color: var(--pc);
+  width: auto;
+  gap: 5px;
+  padding: 0 5px;
+  height: 30px;
 }

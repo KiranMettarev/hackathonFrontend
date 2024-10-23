@@ -1,0 +1,121 @@
+<div
+  *ngIf="!showIframe"
+  class="page createCaseWrapper"
+  layout="row"
+  layout-align="center center"
+>
+  <div class="addCase">
+    <div layout="column" layout-align="center center">
+      <div *ngIf="(!showIframe && !isLoading) || !isLoading">
+        <div class="row" layout="row" layout-align="space-between center">
+          <h5 class="heading fw600 primColor">Add Bank Statemnet</h5>
+          <img
+            class="pt hw18"
+            src="/assets/icons/close_blue.svg"
+            (click)="back()"
+          />
+        </div>
+        <div class="row mt40" layout="column" layout-align="start start">
+          <p class="row label fw400 secColor">
+            Please note that for adding an account through aggregator,<span
+              style="color: var(--error)"
+            >
+              client must give consent</span
+            >
+            to sharing their account details with aggregator.
+          </p>
+        </div>
+
+        <div>
+          <form [formGroup]="contactNoForm">
+            <div class="row mt40" layout="column" layout-align="start center">
+              <div class="row" layout="column" layout-align="start start">
+                <label class="required mb5">Mobile Number</label>
+                <input
+                  class="textInput"
+                  formControlName="mobNumber"
+                  type="text"
+                  maxlength="10"
+                  placeholder="Enter mobile number"
+                  [class.errInput]="
+                    f['mobNumber'].errors &&
+                    f['mobNumber'].touched &&
+                    formSubmitCall
+                  "
+                  (keypress)="isNumberKey($event)"
+                />
+                <small
+                  *ngIf="
+                    isAlphabetFlag &&
+                    !f['mobNumber'].errors?.['required'] &&
+                    formSubmitCall
+                  "
+                  class="errorMsg"
+                  >Only numbers are allowed.</small
+                >
+                <div
+                  class="mt5"
+                  *ngIf="
+                    f['mobNumber'].errors &&
+                    f['mobNumber'].touched &&
+                    formSubmitCall
+                  "
+                >
+                  <small
+                    *ngIf="f['mobNumber'].errors?.['required']"
+                    class="errorMsg"
+                    >Number is required.</small
+                  >
+                  <small
+                    *ngIf="
+                      f['mobNumber'].errors?.['invalidMobileNumber'] &&
+                      !f['mobNumber'].errors?.['required'] &&
+                      !isAlphabetFlag
+                    "
+                    class="errorMsg"
+                  >
+                    Please enter a valid 10-digit mobile number.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="!showIframe && !isLoading">
+          <button
+            type="button"
+            class="button mt40"
+            [disabled]="contactNoForm.invalid"
+            (click)="giveConsent()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      <!-- <app-loading-indicator
+        [isLoading]="isLoading"
+        [progress]="progress"
+      ></app-loading-indicator> -->
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="showIframe"
+  class="createCaseWrapper contain"
+  layout="row"
+  layout-align="center center"
+>
+  <img
+    class="pt hw18 closeButton"
+    src="/assets/icons/close_blue.svg"
+    (click)="closeIframe()"
+  />
+  <iframe
+    #iframe
+    [src]="baseUrl"
+    sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
+    style="height: 80vh; width: 80vw"
+  ></iframe>
+</div>

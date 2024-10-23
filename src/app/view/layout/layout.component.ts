@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { firstValueFrom } from "rxjs";
+import { AuthService } from "../../services/auth.service";
+import { LocalStorageService } from "../../services/local-storage.service";
 
 @Component({
   selector: "app-layout",
@@ -9,6 +12,8 @@ import { Router } from "@angular/router";
 export class LayoutComponent {
   constructor(
     private router: Router,
+    private authService: AuthService,
+    private localStorage: LocalStorageService,
   ) {}
 
   userFullName: string = "";
@@ -29,6 +34,7 @@ export class LayoutComponent {
   async logOut(): Promise<void> {
     try {
       // await firstValueFrom(this.authService.logout());
+      this.localStorage.remove("auth")
       this.router.navigate([""]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {

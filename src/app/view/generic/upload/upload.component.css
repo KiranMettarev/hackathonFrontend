@@ -1,0 +1,8 @@
+.uploadBtn {
+  background-color: var(--white);
+  color: var(--pc);
+  width: auto;
+  gap: 5px;
+  padding: 0 5px;
+  height: 30px;
+}

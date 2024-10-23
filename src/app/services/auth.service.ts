@@ -25,7 +25,7 @@ export class AuthService {
 
   private readonly storageKey = "auth";
 
-  login(loginRequest: LoginForm): Observable<LoginResponse> {    
+    login(loginRequest: LoginForm): Observable<LoginResponse> {    
     return this.http.post<LoginResponse>("otp/authenticate", loginRequest).pipe(
       switchMap((r) => this.localStorage.insert(this.storageKey, r)),
       catchError((error: unknown) =>
@@ -34,8 +34,30 @@ export class AuthService {
     );
   }
 
+  // login(loginRequest: LoginForm): Observable<any> {  
+  //   return this.http.post<any>("api/otp/authenticate", loginRequest).pipe(
+  //     switchMap((r) => {console.log(r, "r");
+  //      return this.localStorage.insert(this.storageKey, r)} ),
+  //     catchError((error: unknown) =>
+  //       throwError(() => this.errorHandler.handleAuthError(error)),
+  //     ),
+  //   );
+  // }
+  private accessToken: string | null = null;
+
+   // This method retrieves the token (could be from memory, local storage, etc.)
+   getAccessToken(): string | null {
+    return this.accessToken || localStorage.getItem('accessToken');
+  }
+
+  // This method stores the token after login
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+    localStorage.setItem('accessToken', token);
+  }
+
 generateOTP(mobileNumber: string): Observable<OtpResponse> {
-  return this.http.post<OtpResponse>("otp/generateOtp", { mobileNumber }).pipe(
+  return this.http.post<OtpResponse>("api/otp/generateOtp", { mobileNumber }).pipe(
     map((response: OtpResponse) => response),
     catchError((error: unknown) =>
       throwError(() => this.errorHandler.handleOtpError(error))
@@ -53,42 +75,42 @@ generateOTP(mobileNumber: string): Observable<OtpResponse> {
     return from(this.localStorage.get<LoginResponse>(this.storageKey));
   }
 
-  refreshToken(): Observable<LoginResponse> {
-    const state$ = this.currentLoggedInUser();
-    return state$
-      .pipe(map((state) => state.tokens.refreshToken))
-      .pipe(switchMap((refreshToken) => this.reissueToken(refreshToken)))
-      .pipe(map((it) => it.accessToken))
-      .pipe(zipWith(state$))
-      .pipe(map((cons) => this.updateState(cons)))
-      .pipe(
-        switchMap((updated) => this.storeAuthState(updated)),
-        catchError((error: unknown) => {
-          if (!(error instanceof HttpErrorResponse && error.status === 400)) {
-            this.localStorage.remove(this.storageKey);
-            if (confirm("Session expire Please re-login"))
-              window.location.reload();
-          }
+  // refreshToken(): Observable<LoginResponse> {
+  //   const state$ = this.currentLoggedInUser();
+  //   return state$
+  //     .pipe(map((state) => state.tokens.refreshToken))
+  //     .pipe(switchMap((refreshToken) => this.reissueToken(refreshToken)))
+  //     .pipe(map((it) => it.accessToken))
+  //     .pipe(zipWith(state$))
+  //     .pipe(map((cons) => this.updateState(cons)))
+  //     .pipe(
+  //       switchMap((updated) => this.storeAuthState(updated)),
+  //       catchError((error: unknown) => {
+  //         if (!(error instanceof HttpErrorResponse && error.status === 400)) {
+  //           this.localStorage.remove(this.storageKey);
+  //           if (confirm("Session expire Please re-login"))
+  //             window.location.reload();
+  //         }
 
-          return throwError(() => error);
-        }),
-      );
-  }
+  //         return throwError(() => error);
+  //       }),
+  //     );
+  // }
 
   private storeAuthState(updated: LoginResponse): Promise<LoginResponse> {
     return this.localStorage.update(this.storageKey, updated);
   }
 
-  private updateState(cons: [arg: string, LoginResponse]) {
-    const [accessToken, state] = cons;
-    state.tokens.accessToken = accessToken;
-    return state;
-  }
+  // private updateState(cons: [arg: string, LoginResponse]) {
+  //   const [accessToken, state] = cons;
+  //   state.tokens.accessToken = accessToken;
+  //   return state;
+  // }
 
   private reissueToken(
     refreshToken: string,
   ): Observable<{ accessToken: string }> {
-    return this.http.post<{ accessToken: string }>("refresh", {
+    return this.http.post<{ accessToken: any }>("refresh", {
       refreshToken,
     });
   }
@@ -117,7 +139,8 @@ generateOTP(mobileNumber: string): Observable<OtpResponse> {
 
 
 export type LoginResponse = {
-  tokens: Tokens;
+  // tokens: Tokens;
+  tokens: string;
 };
 
 export type OtpResponse = {

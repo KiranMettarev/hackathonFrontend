@@ -41,7 +41,6 @@ body {
   width: 100%;
   height: 100%;
   background: #E1D9F5;
-
 }
 
 .absContain {
@@ -614,12 +613,22 @@ button:disabled {
   font-size: 12px;
 }
 
+.fs13 {
+  font-size: 13px;
+}
+
 .fs14 {
   font-size: 14px;
+}
+.fs15 {
+  font-size: 15px;
 }
 
 .fs16 {
   font-size: 16px;
+}
+.fs20 {
+  font-size: 20px;
 }
 .fs22 {
   font-size: 22px;
@@ -695,11 +704,13 @@ body {
 
 /* text-color */
 .primColor {
-  color: var(--pc);
+  /* color: var(--pc); */
+  color: #65558f;
 }
 
 .secColor {
-  color: var(--texsc);
+  /* color: var(--texsc); */
+  color: #727272;
 }
 
 .textPC {
@@ -736,6 +747,10 @@ body {
 .hw18 {
   width: 18px;
   height: 18px;
+}
+.hw20 {
+  width: 20px;
+  height: 20px;
 }
 
 /* height------ */
