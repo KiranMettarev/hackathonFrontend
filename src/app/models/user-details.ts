@@ -10,7 +10,10 @@ export type Token = {
 };
 export type LoginForm = {
   mobileNumber: string;
+  otp: string
 };
+
+export type MobileNumber = string;
 
 export type UserInfo = {
   bankId: StringOrNull;

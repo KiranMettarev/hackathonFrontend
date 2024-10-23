@@ -1,0 +1,162 @@
+<div class="page createCaseWrapper" layout="row" layout-align="center center">
+  <div class="addCase">
+    <div class="row" layout="row" layout-align="space-between center">
+      <h5 class="heading fw600 primColor">Verify Aadhar card</h5>
+      <img class="pt hw18" src="/assets/icons/close_blue.svg" (click)="back()" />
+    </div>
+    <div class="row mt40" layout="row" layout-align="start center">
+      <p class="label fw400 secColor">Enter Aadhar Number of the Applicant.</p>
+    </div>
+    <div>
+      <form
+        *ngIf="!otpSent"
+        [formGroup]="aadhaarForm"
+        (ngSubmit)="requestOtp()"
+      >
+        <div class="row mt40" layout="column" layout-align="start center">
+          <div class="row" layout="column" layout-align="start start">
+            <label for="adhaarNumber" class="required mb5"
+              >Aadhaar Number:</label
+            >
+            <input
+              id="adhaarNumber"
+              class="textInput"
+              formControlName="adhaarNumber"
+              type="text"
+              [readonly]="otpSent"
+              (keypress)="isNumberKey($event)"
+            />
+            <div
+              class="mt10"
+              *ngIf="
+                aadhaarForm.controls['adhaarNumber'].invalid &&
+                aadhaarForm.controls['adhaarNumber'].touched &&
+                isSubmitted
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="
+                  aadhaarForm.controls['adhaarNumber'].hasError('required')
+                "
+              >
+                Aadhaar Number is required
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="aadhaarForm.controls['adhaarNumber'].hasError('pattern')"
+              >
+                Invalid Aadhaar Number format
+              </small>
+            </div>
+            <div
+              class="mt10"
+              *ngIf="
+                errorMessages &&
+                errorMessages['form'] &&
+                aadhaarForm.hasError('serverError')
+              "
+            >
+              <small class="errorMsg">
+                {{ errorMessages["form"] }}
+              </small>
+            </div>
+            <button
+              type="submit"
+              class="button mt40"
+              [disabled]="aadhaarForm.invalid"
+              *ngIf="!otpSent && !isLoading"
+            >
+              Generate OTP
+            </button>
+            <div
+              *ngIf="isLoading"
+              class="row mt40"
+              layout="row"
+              layout-align="center center"
+            >
+              <!-- <app-loading-indicator
+                [isLoading]="isLoading"
+                [loadingMsg]="loadingMsg"
+              ></app-loading-indicator> -->
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form
+        *ngIf="otpSent"
+        [formGroup]="otpForm"
+        (ngSubmit)="verifyAndFetchDetails()"
+      >
+        <div class="row mt40" layout="column" layout-align="start center">
+          <div class="row" layout="column" layout-align="start start">
+            <label for="otp" class="required mb5">OTP:</label>
+            <input
+              id="otp"
+              class="textInput"
+              formControlName="otp"
+              type="text"
+              (keypress)="isNumberKey($event)"
+            />
+
+            <div
+              *ngIf="
+                (otpForm.controls['otp'].invalid &&
+                  otpForm.controls['otp'].touched &&
+                  isSubmitted) ||
+                otpForm.hasError('serverError')
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="otpForm.controls['otp'].hasError('required')"
+                >OTP is required</small
+              >
+              <small
+                class="errorMsg"
+                *ngIf="otpForm.controls['otp'].hasError('minlength')"
+                >OTP must be 6 digits</small
+              >
+              <small
+                class="errorMsg"
+                *ngIf="otpForm.controls['otp'].hasError('maxlength')"
+                >OTP must be 6 digits</small
+              >
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['otp']"
+              >
+                {{ errorMessages["otp"] }}
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['form']"
+              >
+                {{ errorMessages["form"] }}
+              </small>
+            </div>
+            <button
+              type="submit"
+              class="button mt40"
+              [disabled]="otpForm.invalid"
+              *ngIf="!isLoading && otpSent"
+            >
+              Verify OTP
+            </button>
+            <button
+              type="button"
+              class="button mt20"
+              (click)="requestOtp()"
+              [disabled]="!resendOtpEnabled"
+              *ngIf="!isLoading && otpSent"
+            >
+              Resend OTP {{ resendOtpEnabled ? "" : "(" + countdown + "s)" }}
+            </button>
+    
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

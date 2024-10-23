@@ -1,0 +1,71 @@
+<div class="page createCaseWrapper" layout="row" layout-align="center center">
+  <div class="addCase">
+    <div class="row" layout="row" layout-align="space-between center">
+      <h5 class="heading fw600 primColor">Verify PAN Card</h5>
+      <img class="pt hw18" src="/assets/icons/close_blue.svg" (click)="back()" />
+    </div>
+    <div class="row mt40" layout="row" layout-align="start center">
+      <p class="label fw400 secColor">Enter PAN Number of the Applicant.</p>
+    </div>
+    <div>
+      <form [formGroup]="panForm" (ngSubmit)="fetchDetails()">
+        <div class="row mt40" layout="column" layout-align="start center">
+          <div class="row" layout="column" layout-align="start start">
+            <label for="panNumber" class="required mb5">PAN Number:</label>
+            <input
+              id="panNumber"
+              class="textInput"
+              formControlName="panNumber"
+              type="text"
+            />
+            <div
+              class="mt10"
+              *ngIf="
+                (panForm.controls['panNumber'].invalid &&
+                  panForm.controls['panNumber'].touched &&
+                  isSubmitted) ||
+                panForm.hasError('serverError')
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="panForm.controls['panNumber'].hasError('required')"
+                >PAN Number is required</small
+              >
+              <small
+                class="errorMsg"
+                *ngIf="panForm.controls['panNumber'].hasError('pattern')"
+                >Invalid PAN Number format</small
+              >
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['form']"
+              >
+                {{ errorMessages["form"] }}
+              </small>
+            </div>
+            <button
+              type="submit"
+              class="button mt40"
+              [disabled]="panForm.invalid"
+              *ngIf="!isLoading"
+            >
+              Fetch Details
+            </button>
+            <!-- <div
+              *ngIf="isLoading"
+              class="row mt40"
+              layout="row"
+              layout-align="center center"
+            >
+              <app-loading-indicator
+                [isLoading]="isLoading"
+                [loadingMsg]="loadingMsg"
+              ></app-loading-indicator>
+            </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

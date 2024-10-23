@@ -1,0 +1,35 @@
+.h42{
+  height: 42px;
+}
+
+.h173{
+  height: 173px;
+}
+
+.labelPadding{
+  padding: 10px 12px;
+}
+
+button{
+  width: 176px;
+  height: 43px;
+  background: var(--Schemes-On-Primary-Container, #4F378A);
+  color: #ffffff;
+}
+
+.box{
+  width: 113px;
+  height: 114px;
+}
+
+.smallBox{
+  height: 40px;
+  width: 40px;
+  background: var(--Schemes-On-Primary-Container, #4F378A);
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.blur{
+  opacity: 0.3;
+}

@@ -65,8 +65,8 @@
             <h5 class="loginHeading heading">OTP Verification</h5>
           </div>
           <div class="row" layout="column" layout-align="start start">
-             <p class="textMuted label fw400 mt30">
-            We have sent you a 4 digit code on your phone number <span>{{credential.mobileNumber}}</span>. Please enter it below.
+             <p class="textMuted label fw500 mt30" style="color: #707070;">
+            We have sent you a 4 digit code on your phone number <span class="fw700">{{credential.mobileNumber}}</span>. Please enter it below.
           </p>
             <div class="row mt30" layout="row" layout-align="center center">
               <ng-otp-input (onInputChange)="handleOtpChange($event)"
@@ -74,19 +74,18 @@
             
             <button
               type="submit"
-              class="button mt30"
+              class="button mt30 heading fw600"
               style="border-radius: 50px;"
               (click)="verifyAndFetchDetails()"
             >
-              Verify OTP
+              Verify
             </button>
            <div class="row mt30" layout="column" layout-align="start start">
             <h5 class="textMuted label fw600">Didn't receive a code?</h5>
-            <h5 class="mt10 primColor label fw600">Resend OTP</h5>
+            <h5 class="mt10 primColor label fw600 brdBtmPrim" style="padding-bottom: 2px;">Resend</h5>
            </div>
           </div>
         </div>
       </form>
-
   </div>
 </div>

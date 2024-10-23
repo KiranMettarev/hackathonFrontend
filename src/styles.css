@@ -40,7 +40,8 @@ body {
 .contain {
   width: 100%;
   height: 100%;
-  background-color: var(--white);
+  background: #E1D9F5;
+
 }
 
 .absContain {
@@ -110,7 +111,7 @@ div:focus {
   font-weight: 500;
 }
 .fw600 {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 .fw700 {
   font-weight: 700;
@@ -619,6 +620,9 @@ button:disabled {
 
 .fs16 {
   font-size: 16px;
+}
+.fs22 {
+  font-size: 22px;
 }
 
 .title-container {
