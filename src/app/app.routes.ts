@@ -4,6 +4,7 @@ import { HomeComponent } from './view/home/home.component';
 import { PageLayout } from './view/layout/pageLayout';
 import { setLayout } from './view/layout/layoutResolver';
 import { NgModule } from '@angular/core';
+import { WelcomeComponent } from './view/welcome/welcome/welcome.component';
 
 
 const user: Routes = [
@@ -12,8 +13,10 @@ const user: Routes = [
 
 ];
 const unAuthorize: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "", redirectTo: "/welcome", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  { path: "welcome", component: WelcomeComponent },
+
 ];
 
 const routes: Routes = [
