@@ -113,8 +113,8 @@ console.log(this.bankDetails, "bankDetails");
         data: ['604.57', '49225.43', '292909.46', '14843.07','2152.89', '86260.86', '86566.86']
     }],
       chart: {
-      height: '400px',
-      width: '350px',
+      height: '380px',
+      width: '100%',
       // type: 'line',
       type: 'area',
       zoom: {
