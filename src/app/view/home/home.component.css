@@ -35,6 +35,7 @@ button{
 
 .blur{
   opacity: 0.3;
+  pointer-events: none;
 }
 
 .card{
