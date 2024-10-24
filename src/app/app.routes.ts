@@ -11,6 +11,7 @@ import { BankOffersComponent } from './view/bank-offers/bank-offers.component';
 const user: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
+  { path: "offers", component: BankOffersComponent },
 
 ];
 const unAuthorize: Routes = [

@@ -1,4 +1,4 @@
-<div *ngIf="!aadharFlag" class="contain" style="overflow: auto;">
+<div *ngIf="!aadharFlag" class="contain">
   <div class="col" layout="row" layout-align="center center" style="height: 137px;">
     <div class="box pt10" layout="column" layout-align="start center">
       <div class="smallBox mb10" style="padding: 9px 16px;" (click)="step = 1">1</div>
@@ -16,159 +16,31 @@
 
 
 
-  <div class="col" *ngIf="step == 1" style="padding: 20px 10px; height: calc(100% - 137px);" >  
-
-    <!-- <div class="row h155 card" *ngIf="!aadhaarDataFlag" layout="column" layout-align="center center" style="gap: 20px;">
-      <div class="h42 labelPadding fs16 fw600" layout="column" layout-align="center center" style="gap: 10px;">
-        <h5 class="fs16 fw600 primColor">Aadhar</h5>
-        <h5 class="fs14 fw400 secColor">Fetch your Aadhaar details online</h5>
-      </div>
-      <button (click)="fetchKYC('aadhar')">Fetch Online</button>
+  <div class="row" style=" height: calc(100% - 137px); overflow: auto;">
+    <div class="col" *ngIf="step == 1" style="padding: 20px 10px;" >  
+      <app-kyc-home (step)=stepVal($event)></app-kyc-home>
   </div>
 
-  <div class="row card pad10" *ngIf="aadhaarDataFlag" layout="column" layout-align="start start" style="gap: 10px;  height: auto;">
-    <div class="fs16 fw600 primColor">Aadhar Details</div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Name : </h5>
-      <h5 class="fs14 fw500 textPC">{{adharDetails.fullName}}</h5>
-    </div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Number :</h5>
-      <h5 class="fs14 fw500 textPC">{{adharDetails.adhaarNumber}}</h5>
-    </div>
-   <div>
-     <h5 class="fs14 fw500 primColor">DOB : </h5>
-    <h5 class="fs14 fw500 textPC">{{adharDetails.birthDate}}</h5>
-   </div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Gender :</h5>
-      <h5 class="fs14 fw500 textPC">{{adharDetails.gender}}</h5>
-    </div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Address :</h5>
-      <h5 class="fs14 fw500 textPC">{{adharDetails.address}}</h5>
-    </div>
+  <div *ngIf="step == 2" class="col" style="padding: 10px 20px;">
+    <app-bank-home (step)=stepVal($event)></app-bank-home>
   </div>
 
-
-
-  <div class="row h155 card mt20" *ngIf="!panDataFlag" layout="column" layout-align="center center" style="gap: 20px;">
-      <div class="h42 labelPadding fs16 fw600" layout="column" layout-align="center center" style="gap: 10px;">
-        <h5 class="fs16 fw600 primColor">Pan</h5>
-        <h5 class="fs14 fw400 secColor">Fetch your Pan details online</h5>
-      </div>
-      <button (click)="fetchKYC('pan')">Fetch Online</button>
+  <div *ngIf="step == 3" class="col" style="padding: 50px 34px;">
+      <app-quotation-home></app-quotation-home>
   </div>
 
-  <div class="row card pad10 mt20" *ngIf="panDataFlag" layout="column" layout-align="start start" style="gap: 10px; height: auto;">
-    <div class="fs16 fw600 primColor">Pan Details</div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Name : </h5>
-      <h5 class="fs14 fw500 textPC">{{panDetails.fullName}}</h5>
-    </div>
-    <div>
-      <h5 class="fs14 fw500 primColor">Number :</h5>
-      <h5 class="fs14 fw500 textPC">{{panDetails.panNumber}}</h5>
-    </div>
-   <div>
-     <h5 class="fs14 fw500 primColor">DOB : </h5>
-    <h5 class="fs14 fw500 textPC">{{panDetails.birthDate}}</h5>
-   </div>
-   
-    <div>
-      <h5 class="fs14 fw500 primColor">Aadhar Linked :</h5>
-      <h5 class="fs14 fw500 textPC">{{panDetails.aadhaarLinked}}</h5>
-    </div>
-     <div>
-      <h5 class="fs14 fw500 primColor">Address :</h5>
-      <h5 class="fs14 fw500 textPC">{{panDetails.address}}</h5>
-    </div>
-  </div> -->
-
-  <app-kyc-home (step)=stepVal($event)></app-kyc-home>
-
-  <!-- <div class="row mt20" layout="row" layout-align="end center">
-    <div (click)="step = 2">
-      <h5 class="fs16 fw600 primColor">Next</h5>
-      <img class="hw20" src="/assets/icons/arrow_next.svg">
-    </div>
-  </div> -->
-
-  </div>
-
-
-  <!-- <div *ngIf="step == 2">
-    <div class="row" style="height: 354px;" layout="column" layout-align="center center">
-    <div class="col h42 labelPadding fs16 fw600" layout="column" layout-align="center center">
-      <h5 class="fs22 fw400">Bank Statement is not uploaded yet.</h5>
-      <h5 class="fs16 fw400">Add a bank account to proceed</h5>
-    </div>
-    <div class="row" layout="row" layout-align="center center"><button>Add Account</button></div>
-  </div>
-  </div> -->
-
-    <div *ngIf="step == 2" class="col" style="padding: 10px 20px; height: calc(100% - 137px);">
-      <div 
-      class="row"
-      style="height: 262px; background-color: #FFFFFF;"
-      layout="column"
-      layout-align="center center"
-    >
-      <h5 class="fs20 fw400 textPC">
-        Bank Statement is not uploaded yet.
-      </h5>
-      <h5
-        class="fs15 fw400 textPC"
-        style="margin: 20px 0px"
-      >
-        Add a bank account to proceed
-      </h5>
-      <button class="button fs14 fw700" style="width: 180px" (click)="addAccount()">
-        Add Account
-      </button>
-      <span class="fs13 fw400 mt5 textPC">Using account aggregator</span>
-    </div>
-    </div>
-
-    <div *ngIf="step == 3" class="col" style="padding: 50px 34px; height: calc(100% - 137px);">
-      <div class="row h155" style="background-color: #FFFFFF;padding: 15px;">
-        <h5 class="row fs16 fw600 primColor">Upload your quotation</h5>
-        <!-- <div class="row" layout="column" layout-align="center center">
-          <div>
-            <input
-              type="file"
-              #fileInput
-              id="fileInput"
-              style="display: none"
-              (change)="onFileSelected($event)"
-              accept="application/pdf"
-            />
-            <div class="mt40" style="border-bottom: 1px solid #65558f">
-              <button
-                type="button"
-                class="label fw500 uploadBtn h30"
-                (click)="fileInput.click()" layout="row" layout-align="center center"
-              >
-                <img src="assets/icons/Add.svg" />
-                <h5>Upload File</h5>
-              </button>
-            </div>
-          </div>
-        </div> -->
-        <app-upload></app-upload>
-      </div>
-    </div>
-
-   <div *ngIf="step==4" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
+   <!-- <div *ngIf="step==4" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
       <div class="fs20 fw400 textPC" style="text-align: center;">We’re on it! Fetching the best bank loan deals for you...</div>
-    </div>
+    </div> -->
+
+    <div *ngIf="step == 4" class="col" style="padding: 50px 34px;">
+      <app-bank-offers></app-bank-offers>
+  </div>
+
+  </div>
 
 </div>
 
-<!-- <div *ngIf="aadharFlag"><app-aadhar (aadhaarInfo)="aadhaarInfo($event)" (callback)="callBack($event)"></app-aadhar></div>
-<div *ngIf="panFlag"><app-pan (panInfo)="panInfo($event)" (callback)="callBack($event)"></app-pan></div> -->
-<!-- <div *ngIf="billFlag"><app-bill (callback)="callBack($event)"></app-bill></div> -->
- <div *ngIf="showUploadType"><app-aa-integration  (callback)="callBackAA($event)"></app-aa-integration></div>
 
 
   
