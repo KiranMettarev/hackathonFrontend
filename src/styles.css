@@ -293,6 +293,10 @@ div[hidden] {
 }
 
 /* padding */
+.pad10 {
+  padding: 10px;
+}
+
 .pad15 {
   padding: 15px;
 }
@@ -587,6 +591,7 @@ button:disabled {
 
 .createCaseWrapper > div {
   max-height: 85vh;
+  max-width: 85vw;
 }
 
 .addCase {

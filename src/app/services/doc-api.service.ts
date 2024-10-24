@@ -14,14 +14,14 @@ export class DocAPIService {
     return this.httpService.post("doc/electricity", billDetails);
   }
 
-  getPanDetails(panDetails: DocRequest): Observable<any> {
-    return this.httpService.post("doc/pan", panDetails);
+  getPanDetails(panDetails: any): Observable<any> {
+    return this.httpService.post("api/kyc/pannumber", panDetails);
   }
   getAadharOTP(adharDetails: DocRequest): Observable<any> {
     return this.httpService.post("doc/adhaar/otp", adharDetails);
   }
-  getAadhar(adharDetails: StringOrNull): Observable<any> {
-    return this.httpService.post("kyc/adhaar", adharDetails);
+  getAadhar(adharDetails: any): Observable<any> {
+    return this.httpService.post("api/kyc/adhaar", adharDetails);
   }
   getBankStatementAnalysis(request: DocRequest): Observable<any> {
     return this.httpService.post("doc/bs/analyze", request);

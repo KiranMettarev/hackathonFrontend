@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CallBackEvent } from '../../models/user-details';
+import { AadhaarDetails, AdharState, PanDetails, PanState } from '../../models/kyc';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,9 @@ export class HomeComponent {
     }
   }
 
-  callBack(ival: CallBackEvent): void {
+  callBack(iVal: CallBackEvent): void {
+    console.log(iVal, "ivalAdhar");
+    
     this.aadharFlag = false
     this.panFlag = false
     this.billFlag = false
@@ -81,5 +84,29 @@ export class HomeComponent {
       fileInput.value = "";
     }
   }
+
+    stepVal(iVal: number): void {
+      this.step = iVal
+      console.log(this.step);
+      
+  }
+
+  // aadhaarDataFlag: boolean = false
+  // panDataFlag: boolean = false
+  // adharDetails!: AadhaarDetails
+  // panDetails!: PanDetails
+
+  // aadhaarInfo(adhar: AadhaarDetails): void {
+  //   this.adharDetails = adhar
+  //   this.aadhaarDataFlag = true
+  //   console.log(adhar, "workAdhar");
+    
+  // }
+
+  // panInfo(pan: PanDetails): void {
+  //    this.panDetails = pan
+  //   this.panDataFlag = true
+  //   console.log(pan, "workPan");
+  // }
 
 }

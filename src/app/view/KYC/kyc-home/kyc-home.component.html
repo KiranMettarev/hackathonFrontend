@@ -1,0 +1,79 @@
+ <div>
+  <div class="row h155 card" *ngIf="!aadhaarDataFlag" layout="column" layout-align="center center" style="gap: 20px;">
+      <div class="h42 labelPadding fs16 fw600" layout="column" layout-align="center center" style="gap: 10px;">
+        <h5 class="fs16 fw600 primColor">Aadhar</h5>
+        <h5 class="fs14 fw400 secColor">Fetch your Aadhaar details online</h5>
+      </div>
+      <button (click)="fetchKYC('aadhar')">Fetch Online</button>
+  </div>
+
+  <div class="row card pad10" *ngIf="aadhaarDataFlag" layout="column" layout-align="start start" style="gap: 10px;  height: auto;">
+    <div class="fs16 fw600 primColor">Aadhar Details</div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Name : </h5>
+      <h5 class="fs14 fw500 textPC">{{adharDetails.fullName}}</h5>
+    </div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Number :</h5>
+      <h5 class="fs14 fw500 textPC">{{adharDetails.adhaarNumber}}</h5>
+    </div>
+   <div>
+     <h5 class="fs14 fw500 primColor">DOB : </h5>
+    <h5 class="fs14 fw500 textPC">{{adharDetails.birthDate}}</h5>
+   </div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Gender :</h5>
+      <h5 class="fs14 fw500 textPC">{{adharDetails.gender}}</h5>
+    </div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Address :</h5>
+      <h5 class="fs14 fw500 textPC">{{adharDetails.address}}</h5>
+    </div>
+  </div>
+
+
+
+  <div class="row h155 card mt20" *ngIf="!panDataFlag" layout="column" layout-align="center center" style="gap: 20px;">
+      <div class="h42 labelPadding fs16 fw600" layout="column" layout-align="center center" style="gap: 10px;">
+        <h5 class="fs16 fw600 primColor">Pan</h5>
+        <h5 class="fs14 fw400 secColor">Fetch your Pan details online</h5>
+      </div>
+      <button (click)="fetchKYC('pan')">Fetch Online</button>
+  </div>
+
+  <div class="row card pad10 mt20" *ngIf="panDataFlag" layout="column" layout-align="start start" style="gap: 10px; height: auto;">
+    <div class="fs16 fw600 primColor">Pan Details</div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Name : </h5>
+      <h5 class="fs14 fw500 textPC">{{panDetails.fullName}}</h5>
+    </div>
+    <div>
+      <h5 class="fs14 fw500 primColor">Number :</h5>
+      <h5 class="fs14 fw500 textPC">{{panDetails.panNumber}}</h5>
+    </div>
+   <div>
+     <h5 class="fs14 fw500 primColor">DOB : </h5>
+    <h5 class="fs14 fw500 textPC">{{panDetails.birthDate}}</h5>
+   </div>
+   
+    <div>
+      <h5 class="fs14 fw500 primColor">Aadhar Linked :</h5>
+      <h5 class="fs14 fw500 textPC">{{panDetails.aadhaarLinked}}</h5>
+    </div>
+     <div>
+      <h5 class="fs14 fw500 primColor">Address :</h5>
+      <h5 class="fs14 fw500 textPC">{{panDetails.address}}</h5>
+    </div>
+  </div>
+  <div class="row mt20" layout="row" layout-align="end center">
+    <div (click)="next(2)">
+      <h5 class="fs16 fw600 primColor">Next</h5>
+      <img class="hw20" src="/assets/icons/arrow_next.svg">
+    </div>
+  </div>
+ </div>
+
+
+
+<div *ngIf="aadharFlag"><app-aadhar (aadhaarInfo)="aadhaarInfo($event)" (callback)="callBack($event)"></app-aadhar></div>
+<div *ngIf="panFlag"><app-pan (panInfo)="panInfo($event)" (callback)="callBack($event)"></app-pan></div>

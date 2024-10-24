@@ -1,0 +1,36 @@
+<div *ngIf="isLoading" class="row" layout="column" layout-align="center center">
+  <div class="loading-spinner mt30"></div>
+  <div
+    *ngIf="progress"
+    class="loading-progress"
+    layout="row"
+    layout-align="center center"
+  >
+    {{ progress }}%
+  </div>
+  <div
+    *ngIf="ismsg"
+    class="loading-progress"
+    layout="row"
+    layout-align="center center"
+  >
+    <h5
+      style="
+        font-size: 14px;
+        color: var(--pc);
+        margin: 10px 0px 30px 0px;
+        text-align: center;
+      "
+    >
+      {{ msg }}
+    </h5>
+  </div>
+  <div
+    *ngIf="loadingMsg"
+    class="loading-progress"
+    layout="row"
+    layout-align="center center"
+  >
+    Please Wait...
+  </div>
+</div>

@@ -19,6 +19,7 @@ import { FormErrorHandler } from "../../../validators/form-error-handler";
 })
 export class AadharComponent {
   @Output() callback = new EventEmitter();
+  @Output() aadhaarInfo = new EventEmitter();
   // @Input() block!: Block;
   back(): void {
     this.callback.emit({ type: "close" });
@@ -57,6 +58,37 @@ export class AadharComponent {
     });
   }
 
+  fetchAadhar(){
+    const formValue = this.aadhaarForm.getRawValue();
+      this.adhaarNumber = formValue.adhaarNumber;
+      const adharObj = {
+         'adharNumber': this.adhaarNumber
+      }
+
+    this.docService.getAadhar( adharObj ).subscribe(
+      (response) => {
+        if (response) {
+          this.aadhaarDetails = response.data.adharState.aadhar;
+          this.aadhaarInfo.emit(this.aadhaarDetails)
+          console.log(this.aadhaarDetails, "---------")
+        
+
+          this.callback.emit({
+            type: "close",
+          });
+        }
+      },
+      (error) => {
+        this.errorMessages = FormErrorHandler.handleServerErrors(
+          error,
+          this.otpForm,
+        );
+        this.isLoading = false;
+        this.loadingMsg = false;
+      },
+    );
+  }
+
   requestOtp(): void {
     if (this.aadhaarForm.valid) {
       this.isLoading = true;
@@ -88,42 +120,42 @@ export class AadharComponent {
     }
   }
 
-  verifyAndFetchDetails(): void {
-    this.isSubmitted = true;
-    if (this.otpForm.valid) {
-      this.isLoading = true;
-      this.loadingMsg = true;
-      const formValue = this.otpForm.getRawValue();
-      const reqParam: DocRequest = {
-        // blockId: this.block.id,
-        adhaarNumber: this.adhaarNumber,
-        ...formValue,
-      };
-      this.docService.getAadhar(reqParam).subscribe(
-        (response) => {
-          if (response) {
-            this.aadhaarDetails = response.state;
-            this.isSubmitted = false;
-            this.isLoading = false;
-            this.loadingMsg = false;
+  // verifyAndFetchDetails(): void {
+  //   this.isSubmitted = true;
+  //   if (this.otpForm.valid) {
+  //     this.isLoading = true;
+  //     this.loadingMsg = true;
+  //     const formValue = this.otpForm.getRawValue();
+  //     const reqParam: DocRequest = {
+  //       // blockId: this.block.id,
+  //       adhaarNumber: this.adhaarNumber,
+  //       ...formValue,
+  //     };
+  //     this.docService.getAadhar(reqParam).subscribe(
+  //       (response) => {
+  //         if (response) {
+  //           this.aadhaarDetails = response.state;
+  //           this.isSubmitted = false;
+  //           this.isLoading = false;
+  //           this.loadingMsg = false;
 
-            this.callback.emit({
-              type: "close",
-              data: this.aadhaarDetails.aadhar,
-            });
-          }
-        },
-        (error) => {
-          this.errorMessages = FormErrorHandler.handleServerErrors(
-            error,
-            this.otpForm,
-          );
-          this.isLoading = false;
-          this.loadingMsg = false;
-        },
-      );
-    }
-  }
+  //           this.callback.emit({
+  //             type: "close",
+  //             data: this.aadhaarDetails.aadhar,
+  //           });
+  //         }
+  //       },
+  //       (error) => {
+  //         this.errorMessages = FormErrorHandler.handleServerErrors(
+  //           error,
+  //           this.otpForm,
+  //         );
+  //         this.isLoading = false;
+  //         this.loadingMsg = false;
+  //       },
+  //     );
+  //   }
+  // }
 
   startResendOtpTimer(): void {
     this.resendOtpEnabled = false;

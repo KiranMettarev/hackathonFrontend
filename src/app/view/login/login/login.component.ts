@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.login( this.credential ).subscribe({
         next: (res) => {
           console.log(res, "responce----")
-          this.router.navigate(['user']);
+          // this.router.navigate(['user']);
         },
         error: ({ error }) => {
           console.log(error, "error---")

@@ -8,7 +8,8 @@
       <p class="label fw400 secColor">Enter PAN Number of the Applicant.</p>
     </div>
     <div>
-      <form [formGroup]="panForm" (ngSubmit)="fetchDetails()">
+      <!-- <form [formGroup]="panForm" (ngSubmit)="fetchDetails()"> -->
+      <form [formGroup]="panForm" (ngSubmit)="fetchPan()">
         <div class="row mt40" layout="column" layout-align="start center">
           <div class="row" layout="column" layout-align="start start">
             <label for="panNumber" class="required mb5">PAN Number:</label>
@@ -47,11 +48,11 @@
             <button
               type="submit"
               class="button mt40"
-              [disabled]="panForm.invalid"
               *ngIf="!isLoading"
-            >
+              >
               Fetch Details
             </button>
+            <!-- [disabled]="panForm.invalid" -->
             <!-- <div
               *ngIf="isLoading"
               class="row mt40"

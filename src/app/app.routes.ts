@@ -5,6 +5,7 @@ import { PageLayout } from './view/layout/pageLayout';
 import { setLayout } from './view/layout/layoutResolver';
 import { NgModule } from '@angular/core';
 import { WelcomeComponent } from './view/welcome/welcome/welcome.component';
+import { BankOffersComponent } from './view/bank-offers/bank-offers.component';
 
 
 const user: Routes = [

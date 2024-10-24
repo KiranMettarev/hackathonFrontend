@@ -18,6 +18,8 @@ import { PanComponent } from "./view/KYC/pan/pan.component";
 import { BillComponent } from "./view/KYC/bill/bill.component";
 import { AaIntegrationComponent } from "./view/bank/aa-integration/aa-integration.component";
 import { UploadComponent } from "./view/generic/upload/upload.component";
+import { BankOffersComponent } from "./view/bank-offers/bank-offers.component";
+import { KycHomeComponent } from "./view/KYC/kyc-home/kyc-home.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { UploadComponent } from "./view/generic/upload/upload.component";
     PanComponent,
     BillComponent,
     AaIntegrationComponent,
-    UploadComponent
+    UploadComponent,
+    KycHomeComponent,
   ],
 
   bootstrap: [AppComponent],
@@ -40,6 +43,7 @@ import { UploadComponent } from "./view/generic/upload/upload.component";
     ReactiveFormsModule,
     NgOtpInputModule,
     AppRoutingModule,
+    BankOffersComponent
 ],
 
    providers: [

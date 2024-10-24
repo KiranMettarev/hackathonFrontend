@@ -16,6 +16,7 @@ import { DocAPIService } from "../../../services/doc-api.service";
 })
 export class PanComponent {
   @Output() callback = new EventEmitter();
+  @Output() panInfo = new EventEmitter();
 
   private destroy$ = new Subject<void>();
   errorMessages: { [key: string]: string } = {};
@@ -23,6 +24,7 @@ export class PanComponent {
   isLoading: boolean = false;
   loadingMsg: boolean = false;
   panForm: FormGroup;
+  panDetails!: PanState
   constructor(
     private fb: FormBuilder,
     private docService: DocAPIService,
@@ -30,7 +32,8 @@ export class PanComponent {
     this.panForm = this.fb.group({
       panNumber: [
         "",
-        [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")],
+        // [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")],
+        [Validators.required],
       ],
     });
   }
@@ -92,6 +95,30 @@ export class PanComponent {
       // };
       // this.getPanDetails(reqParam);
     }
+  }
+panNumber!: string 
+
+  fetchPan(){
+    const formValue = this.panForm.getRawValue();
+      this.panNumber = formValue.panNumber;
+      const panObj = {
+         'panNumber': this.panNumber
+      }
+
+    this.docService.getPanDetails( panObj ).subscribe(
+      (response) => {
+        if (response) {
+          this.panDetails = response.data.state.pan;
+          this.panInfo.emit(this.panDetails)
+          this.callback.emit({
+            type: "close",
+          });
+        }
+      },
+      (error) => {
+        console.log(error, "errorrrrrrrrrrr");
+      },
+    );
   }
 }
 

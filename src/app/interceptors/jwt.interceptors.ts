@@ -45,41 +45,41 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 // };
 
 // -------------------------------
-// function enrichWithAccessToken(
-//   authService: AuthService,
-//   req: HttpRequest<unknown>,
-//   next: HttpHandlerFn,
-// ): Observable<HttpEvent<unknown>> {
-//   return authService
-//     .currentLoggedInUser()
-//     .pipe(map((userState) => userState.tokens.accessToken))
-//     .pipe(
-//       map((accessToken) =>
-//         req.clone({
-//           setHeaders: {
-//             authorization: `Bearer ${accessToken}`,
-//           },
-//         }),
-//       ),
-//     )
-//     .pipe(switchMap((req) => next(req)));
-// }
-
 function enrichWithAccessToken(
   authService: AuthService,
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> {
-  // Get the stored access token from authService
-  const accessToken = authService.getAccessToken();
-
-  // Clone the request with the Authorization header
-  const clonedRequest = req.clone({
-    setHeaders: {
-      authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  // Pass the cloned request to the next handler
-  return next(clonedRequest);
+  return authService
+    .currentLoggedInUser()
+    .pipe(map((userState) => userState.tokens.accessToken))
+    .pipe(
+      map((accessToken) =>
+        req.clone({
+          setHeaders: {
+            authorization: `Bearer ${accessToken}`,
+          },
+        }),
+      ),
+    )
+    .pipe(switchMap((req) => next(req)));
 }
+
+// function enrichWithAccessToken(
+//   authService: AuthService,
+//   req: HttpRequest<unknown>,
+//   next: HttpHandlerFn,
+// ): Observable<HttpEvent<unknown>> {
+//   // Get the stored access token from authService
+//   const accessToken = authService.getAccessToken();
+
+//   // Clone the request with the Authorization header
+//   const clonedRequest = req.clone({
+//     setHeaders: {
+//       authorization: `Bearer ${accessToken}`,
+//     },
+//   });
+
+//   // Pass the cloned request to the next handler
+//   return next(clonedRequest);
+// }

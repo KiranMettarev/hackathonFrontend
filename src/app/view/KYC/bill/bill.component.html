@@ -1,0 +1,143 @@
+<div class="page createCaseWrapper" layout="row" layout-align="center center">
+  <div class="addCase">
+    <div class="row" layout="row" layout-align="space-between center">
+      <h5 class="heading fw600 primColor">Verify Electricity Bill</h5>
+      <img class="pt hw18" src="/assets/icons/close_blue.svg" (click)="back()" />
+    </div>
+    <div class="row mt40" layout="row" layout-align="start center">
+      <p class="label fw400 secColor">Enter Electricity Bill Details of the Applicant.</p>
+    </div>
+    <div>
+      <form [formGroup]="electricityBillForm" (ngSubmit)="fetchBill()">
+        <div class="row mt40" layout="column" layout-align="start center">
+          <div class="row" layout="column" layout-align="start start">
+            <label for="customerId" class="required mb5">Customer Id:</label>
+            <input
+              id="customerId"
+              class="textInput"
+              formControlName="customerId"
+              type="text"
+              autocomplete="off"
+              (keypress)="isNumberKey($event)"
+            />
+            <div
+              class="mt10 mb5"
+              *ngIf="
+                electricityBillForm.invalid &&
+                electricityBillForm.touched &&
+                isSubmitted
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="
+                  electricityBillForm.controls['customerId'].hasError(
+                    'required'
+                  )
+                "
+                >Customer Id is required
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="
+                  electricityBillForm.controls['customerId'].hasError(
+                    'minlength'
+                  )
+                "
+                >{{ "Customer Id must be at least 12 characters long." }}
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="
+                  electricityBillForm.controls['customerId'].hasError(
+                    'maxlength'
+                  )
+                "
+                >{{ "Customer Id must not be more than 13 characters long." }}
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['customerId']"
+              >
+                {{ errorMessages["customerId"] }}
+              </small>
+            </div>
+
+            <label for="operatorCode" class="required mb5 mt10"
+              >Electricity Provider :</label
+            >
+            <select formControlName="operatorCode">
+              <option value="">Select Electricity Provider</option>
+              @for (code of electricityProviders; track code) {
+                <option [ngValue]="code.code">
+                  {{ code.electricityProvider }}
+                </option>
+              }
+            </select>
+
+            <div
+              class="mt10"
+              *ngIf="
+                electricityBillForm.invalid &&
+                electricityBillForm.touched &&
+                isSubmitted
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="
+                  electricityBillForm.controls['operatorCode'].hasError(
+                    'required'
+                  )
+                "
+              >
+                Operator Code is required</small
+              >
+            </div>
+            <div
+              class="mt10"
+              *ngIf="
+                (electricityBillForm.invalid &&
+                  electricityBillForm.touched &&
+                  isSubmitted) ||
+                electricityBillForm.hasError('serverError')
+              "
+            >
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['operatorCode']"
+              >
+                {{ errorMessages["operatorCode"] }}
+              </small>
+              <small
+                class="errorMsg"
+                *ngIf="errorMessages && errorMessages['form']"
+              >
+                {{ errorMessages["form"] }}
+              </small>
+            </div>
+            <button
+              type="submit"
+              class="button mt40"
+              [disabled]="electricityBillForm.invalid"
+              *ngIf="!isLoading"
+            >
+              Fetch Bill
+            </button>
+            <!-- <div
+              *ngIf="isLoading"
+              class="row mt40"
+              layout="row"
+              layout-align="center center"
+            >
+              <app-loading-indicator
+                [isLoading]="isLoading"
+                [loadingMsg]="loadingMsg"
+              ></app-loading-indicator>
+            </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
       <form
         *ngIf="!otpSent"
         [formGroup]="aadhaarForm"
-        (ngSubmit)="requestOtp()"
+        (ngSubmit)="fetchAadhar()"
       >
         <div class="row mt40" layout="column" layout-align="start center">
           <div class="row" layout="column" layout-align="start start">
@@ -84,7 +84,7 @@
         </div>
       </form>
 
-      <form
+      <!-- <form
         *ngIf="otpSent"
         [formGroup]="otpForm"
         (ngSubmit)="verifyAndFetchDetails()"
@@ -156,7 +156,7 @@
     
           </div>
         </div>
-      </form>
+      </form> -->
     </div>
   </div>
 </div>

@@ -26,7 +26,7 @@ export class AuthService {
   private readonly storageKey = "auth";
 
     login(loginRequest: LoginForm): Observable<LoginResponse> {    
-    return this.http.post<LoginResponse>("otp/authenticate", loginRequest).pipe(
+    return this.http.post<LoginResponse>("api/otp/authenticate", loginRequest).pipe(
       switchMap((r) => this.localStorage.insert(this.storageKey, r)),
       catchError((error: unknown) =>
         throwError(() => this.errorHandler.handleAuthError(error)),
@@ -46,15 +46,15 @@ export class AuthService {
   private accessToken: string | null = null;
 
    // This method retrieves the token (could be from memory, local storage, etc.)
-   getAccessToken(): string | null {
-    return this.accessToken || localStorage.getItem('accessToken');
-  }
+  //  getAccessToken(): string | null {
+  //   return this.accessToken || localStorage.getItem('accessToken');
+  // }
 
   // This method stores the token after login
-  setAccessToken(token: string): void {
-    this.accessToken = token;
-    localStorage.setItem('accessToken', token);
-  }
+  // setAccessToken(token: string): void {
+  //   this.accessToken = token;
+  //   localStorage.setItem('accessToken', token);
+  // }
 
 generateOTP(mobileNumber: string): Observable<OtpResponse> {
   return this.http.post<OtpResponse>("api/otp/generateOtp", { mobileNumber }).pipe(
@@ -139,8 +139,8 @@ generateOTP(mobileNumber: string): Observable<OtpResponse> {
 
 
 export type LoginResponse = {
-  // tokens: Tokens;
-  tokens: string;
+  tokens: Tokens;
+  // tokens: string;
 };
 
 export type OtpResponse = {
@@ -149,7 +149,7 @@ export type OtpResponse = {
 
 export type Tokens = {
   accessToken: string;
-  refreshToken: string;
+  // refreshToken: string;
 };
 export type UserDetails = {
   id: string;
