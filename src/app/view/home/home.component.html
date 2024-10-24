@@ -16,7 +16,7 @@
 
 
 
-  <div class="row" style=" height: calc(100% - 137px); overflow: auto;">
+  <div class="row" style=" height: calc(100% - 137px); overflow-y: auto;overflow-x: hidden;">
     <div class="col" *ngIf="step == 1" style="padding: 20px 10px;" >  
       <app-kyc-home (step)=stepVal($event)></app-kyc-home>
   </div>
