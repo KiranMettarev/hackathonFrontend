@@ -20,6 +20,8 @@ import { AaIntegrationComponent } from "./view/bank/aa-integration/aa-integratio
 import { UploadComponent } from "./view/generic/upload/upload.component";
 import { BankOffersComponent } from "./view/bank-offers/bank-offers.component";
 import { KycHomeComponent } from "./view/KYC/kyc-home/kyc-home.component";
+import { BankHomeComponent } from "./view/bank/bank-home/bank-home.component";
+import { QuotationHomeComponent } from "./view/quotation/quotation-home/quotation-home.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { KycHomeComponent } from "./view/KYC/kyc-home/kyc-home.component";
     AaIntegrationComponent,
     UploadComponent,
     KycHomeComponent,
+    BankHomeComponent,
+    QuotationHomeComponent,
   ],
 
   bootstrap: [AppComponent],

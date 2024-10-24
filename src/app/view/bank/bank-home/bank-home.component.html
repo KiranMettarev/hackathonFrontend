@@ -1,0 +1,121 @@
+<div *ngIf="!showUploadType">
+     <div 
+      class="row"
+      style="height: 262px; background-color: #FFFFFF;"
+      layout="column"
+      layout-align="center center"
+    >
+      <h5 class="fs20 fw400 textPC">
+        Bank Statement is not uploaded yet.
+      </h5>
+      <h5
+        class="fs15 fw400 textPC"
+        style="margin: 20px 0px"
+      >
+        Add a bank account to proceed
+      </h5>
+      <button class="button fs14 fw700" style="width: 180px" (click)="addAccount()">
+        Add Account
+      </button>
+      <span class="fs13 fw400 mt5 textPC">Using account aggregator</span>
+    </div>
+</div>
+
+<!-- ----graph---- -->
+  <div class="row">
+  <div id="smallChart" class="contain">
+    <div id="chartnew"></div>
+</div>
+</div>
+
+
+ <!-- <div *ngIf="showUploadType"><app-aa-integration  (callback)="callBackAA($event)"></app-aa-integration></div> -->
+
+ <div *ngIf="showUploadType" style="gap: 20px;">
+  <div class="row" style="height: 52px;">Bank Details</div>
+  <div class="row" style="height: 270px;">
+    <div class="tableHead tableTitle h40" style="width: 100%;">
+      <div
+          class="col label fw600 secColor"
+          layout="row"
+          layout-align="start center"
+          *ngFor="let headcell of headerArr1; index as i"
+          [style.width]="colconfig1[i]"
+        >
+          {{ headcell.title }}
+        </div>
+    </div>
+    <div class="tableBody" style="height: calc(100% - 40px);">
+      <div class="tableRow borderLR" style="height: 46px;" *ngFor="let item of [1, 2, 3, 4, 5]">
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig1[0]"
+          >
+            1
+          </div>
+
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig1[1]"
+          >
+            Opening Balance
+          </div>
+
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig1[2]"
+          >
+            149423.00 
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt20" style="height: 282px;">
+    <div class="tableHead tableTitle h40" style="width: 100%;">
+          <div
+          class="col label fw600 secColor"
+          layout="row"
+          layout-align="start center"
+          *ngFor="let headcell of headerArr2; index as i"
+          [style.width]="colconfig2[i]"
+        >
+          {{ headcell.title }}
+        </div>
+    </div>
+    <div class="tableBody">
+       <div class="tableRow borderLR" style="height: 46px;" *ngFor="let item of [1, 2, 3, 4, 5]">
+       <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig2[0]"
+          >
+            1
+          </div>
+           <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig2[1]"
+          >
+            Bank statement is authentic
+          </div>
+          </div>
+    </div>
+  </div>
+ 
+  <div class="row pb20" layout="row" layout-align="end end" style="height: 101px;">
+    <div (click)="next(3)">
+      <h5 class="fs16 fw600 primColor">Next</h5>
+      <img class="hw20" src="/assets/icons/arrow_next.svg">
+    </div>
+  </div>
+
+ </div>

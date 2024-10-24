@@ -1,5 +1,5 @@
 <div
-  *ngIf="showIframe"
+  *ngIf="!showIframe"
   class="page createCaseWrapper"
   layout="row"
   layout-align="center center"
@@ -118,18 +118,4 @@
     sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
     style="height: 80vh; width: 80vw"
   ></iframe>
-</div>
-
-<!-- ----graph---- -->
-<div
-  *ngIf="!showIframe"
-  class="createCaseWrapper contain"
-  layout="row"
-  layout-align="center center"
->
-  <div class="contain">
-  <div id="smallChart" class="contain">
-    <div id="chartnew"></div>
-</div>
-</div>
 </div>
