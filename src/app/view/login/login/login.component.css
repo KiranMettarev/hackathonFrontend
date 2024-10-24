@@ -1,25 +1,27 @@
 .primaryHeading {
-  font-family: "Fira Sans";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 34px;
-  letter-spacing: -0.03em;
-  color: var(--white);
-  max-width: 800px;
-  width: 100%;
-}
-
-.secondaryHeading {
-  font-family: "Fira Sans";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  letter-spacing: -0.03em;
-  color: var(--texsc);
-  margin-top: 20px;
-  max-width: 680px;
-  width: 100%;
-}
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 15px;
+  }
+  
+  .secondaryHeading {
+    font-family: "Fira Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+  }
 
 .loginHeading {
   font-weight: 500;

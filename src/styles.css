@@ -159,7 +159,7 @@ div[hidden] {
 .button {
   padding: 12px 24px;
   height: 40px;
-  background: var(--pc);
+  background: #65558F;
   border-radius: 4px;
   width: 100%;
   color: var(--white);
