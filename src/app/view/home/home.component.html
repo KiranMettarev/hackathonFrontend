@@ -1,5 +1,4 @@
 <div *ngIf="!aadharFlag" class="contain">
-<div *ngIf="!aadharFlag" class="contain">
   <div class="col" layout="row" layout-align="center center" style="height: 137px;">
     <div class="box pt10" layout="column" layout-align="start center">
       <div class="smallBox mb10" style="padding: 9px 16px;" (click)="step = 1">1</div>
@@ -20,26 +19,17 @@
   <div class="row" style=" height: calc(100% - 137px); overflow: auto;">
     <div class="col" *ngIf="step == 1" style="padding: 20px 10px;" >  
       <app-kyc-home (step)=stepVal($event)></app-kyc-home>
-  <div class="row" style=" height: calc(100% - 137px); overflow: auto;">
-    <div class="col" *ngIf="step == 1" style="padding: 20px 10px;" >  
-      <app-kyc-home (step)=stepVal($event)></app-kyc-home>
   </div>
 
-  <div *ngIf="step == 2" class="col" style="padding: 10px 20px;">
-    <app-bank-home (step)=stepVal($event)></app-bank-home>
+ 
   <div *ngIf="step == 2" class="col" style="padding: 10px 20px;">
     <app-bank-home (step)=stepVal($event)></app-bank-home>
   </div>
 
   <div *ngIf="step == 3" class="col" style="padding: 50px 34px;">
       <app-quotation-home></app-quotation-home>
-  <div *ngIf="step == 3" class="col" style="padding: 50px 34px;">
-      <app-quotation-home></app-quotation-home>
   </div>
 
-   <!-- <div *ngIf="step==4" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
-      <div class="fs20 fw400 textPC" style="text-align: center;">We’re on it! Fetching the best bank loan deals for you...</div>
-    </div> -->
    <!-- <div *ngIf="step==4" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
       <div class="fs20 fw400 textPC" style="text-align: center;">We’re on it! Fetching the best bank loan deals for you...</div>
     </div> -->
