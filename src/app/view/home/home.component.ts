@@ -11,7 +11,7 @@ import ApexCharts from "apexcharts";
 })
 export class HomeComponent {
 
-  step: number = 1;
+  step: number = 4;
   showUploadType: boolean = false;
   aadharFlag: boolean = false
   panFlag: boolean = false
