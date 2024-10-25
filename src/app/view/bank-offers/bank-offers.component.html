@@ -1,4 +1,4 @@
-<div class="col" style="height:calc(100% - 137px);">
+<div *ngIf="!loadingFlag" class="col" style="height:calc(100% - 137px);">
         <div class="height" style="height:50px;" layout="row" layout-align="start center">
             <h5 class="fs16 fw600">Available loan offers</h5>
         </div>
@@ -50,4 +50,10 @@
             
         </div>
        
+    </div>
+
+    <!-- -----------Loading----- -->
+   <div *ngIf="loadingFlag" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
+      <div class="fs20 fw400 textPC" style="text-align: center;">We’re on it! Fetching the best bank loan deals for you...</div>
+      <div class="loading-spinner mt30"></div>
     </div>

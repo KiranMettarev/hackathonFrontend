@@ -47,6 +47,8 @@ export class AaIntegrationComponent
   // @Input() block!: Block;
   @Input() isError = false;
   @Output() callback = new EventEmitter();
+  @Output() aaFetchFlag = new EventEmitter();
+
   @ViewChild("fileInput") fileInput!: ElementRef;
   @Input() errorMessages: { [key: string]: string } = {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -133,6 +135,36 @@ export class AaIntegrationComponent
     //       console.error("Error fetching data:", err);
     //     },
     //   });
+// --------------------------------
+
+    this.docAPIService
+      .consentAAData({ mobileNumber: mobileNumber })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (block: any) => {
+
+          console.log("Fetched block:", block);
+
+          const data = block.body;
+          this.baseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            data.url!,
+          );
+          console.log("Base URL set:", this.baseUrl);
+          this.showIframe = true;
+          this.previousUrl = this.baseUrl as string;
+          setTimeout(() => {
+            if (this.iframeRef) {
+              this.aaRequestData = data.analysis;
+              this.monitorIframeUrlChange();
+               this.aaFetchFlag.emit(true)
+            }
+          }, 100);
+        },
+        error: (err) => {
+          console.error("Error fetching data:", err);
+          this.aaFetchFlag.emit(false)
+        },
+      });
     this.formSubmitCall = false;
   }
 
@@ -167,9 +199,10 @@ export class AaIntegrationComponent
 
   closeIframe(): void {
     this.showIframe = false;
+    this.aaFetchFlag.emit(false)
     this.callback.emit({
       type: "close",
-      data: this.aaRequestData,
+      // data: this.aaRequestData,
     });
   }
 
@@ -182,6 +215,7 @@ export class AaIntegrationComponent
   back(): void {
     this.callback.emit({ type: "close" });
   }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

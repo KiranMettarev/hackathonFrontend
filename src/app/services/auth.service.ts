@@ -26,7 +26,7 @@ export class AuthService {
   private readonly storageKey = "auth";
 
     login(loginRequest: LoginForm): Observable<LoginResponse> {    
-    return this.http.post<LoginResponse>("api/otp/authenticate", loginRequest).pipe(
+    return this.http.post<LoginResponse>("otp/authenticate", loginRequest).pipe(
       switchMap((r) => this.localStorage.insert(this.storageKey, r)),
       catchError((error: unknown) =>
         throwError(() => this.errorHandler.handleAuthError(error)),
@@ -57,7 +57,7 @@ export class AuthService {
   // }
 
 generateOTP(mobileNumber: string): Observable<OtpResponse> {
-  return this.http.post<OtpResponse>("api/otp/generateOtp", { mobileNumber }).pipe(
+  return this.http.post<OtpResponse>("otp/generateOtp", { mobileNumber }).pipe(
     map((response: OtpResponse) => response),
     catchError((error: unknown) =>
       throwError(() => this.errorHandler.handleOtpError(error))

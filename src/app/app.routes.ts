@@ -6,12 +6,14 @@ import { setLayout } from './view/layout/layoutResolver';
 import { NgModule } from '@angular/core';
 import { WelcomeComponent } from './view/welcome/welcome/welcome.component';
 import { BankOffersComponent } from './view/bank-offers/bank-offers.component';
+import { AnalysisComponent } from './view/bank/analysis/analysis.component';
 
 
 const user: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
   { path: "offers", component: BankOffersComponent },
+  { path: "analysis", component: AnalysisComponent },
 
 ];
 const unAuthorize: Routes = [

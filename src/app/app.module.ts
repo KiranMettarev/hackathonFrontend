@@ -22,6 +22,7 @@ import { BankOffersComponent } from "./view/bank-offers/bank-offers.component";
 import { KycHomeComponent } from "./view/KYC/kyc-home/kyc-home.component";
 import { BankHomeComponent } from "./view/bank/bank-home/bank-home.component";
 import { QuotationHomeComponent } from "./view/quotation/quotation-home/quotation-home.component";
+import { AnalysisComponent } from "./view/bank/analysis/analysis.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { QuotationHomeComponent } from "./view/quotation/quotation-home/quotatio
     KycHomeComponent,
     BankHomeComponent,
     QuotationHomeComponent,
+    AnalysisComponent,
+    BankOffersComponent
   ],
 
   bootstrap: [AppComponent],
@@ -47,7 +50,6 @@ import { QuotationHomeComponent } from "./view/quotation/quotation-home/quotatio
     ReactiveFormsModule,
     NgOtpInputModule,
     AppRoutingModule,
-    BankOffersComponent
 ],
 
    providers: [

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { Subject, takeUntil } from "rxjs";
 import { BlockStatus } from "../../../models/type";
@@ -24,23 +24,26 @@ export class UploadComponent {
   private objectUrl: string | null = null;
   pdfSrc: SafeResourceUrl | null = null;
   @Input() block!: any;
+  @Output() fileFlag = new EventEmitter();
   fileDummyClick(): void {
     this.fileInput.nativeElement.click();
   }
 
   onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      if (file.type === "application/pdf") {
-        this.loadFile(file);
-        const formData = new FormData();
-        formData.append("file", file);
-        this.uploadFile(formData);
-      } else {
-        alert("Please select a PDF file.");
-      }
-    }
+         this.fileFlag.emit(true)
+
+    // const input = event.target as HTMLInputElement;
+    // if (input.files && input.files.length > 0) {
+    //   const file = input.files[0];
+    //   if (file.type === "application/pdf") {
+    //     this.loadFile(file);
+    //     const formData = new FormData();
+    //     formData.append("file", file);
+    //     this.uploadFile(formData);
+    //   } else {
+    //     alert("Please select a PDF file.");
+    //   }
+    // }
   }
 
   loadFile(file: Blob): void {
@@ -88,6 +91,7 @@ export class UploadComponent {
             this.courierService.notifyOther({
               file: file,
             });
+            this.fileFlag.emit(true)
           },
         });
     }

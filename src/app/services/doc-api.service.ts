@@ -15,21 +15,21 @@ export class DocAPIService {
   }
 
   getPanDetails(panDetails: any): Observable<any> {
-    return this.httpService.post("api/kyc/pannumber", panDetails);
+    return this.httpService.post("kyc/pannumber", panDetails);
   }
   getAadharOTP(adharDetails: DocRequest): Observable<any> {
     return this.httpService.post("doc/adhaar/otp", adharDetails);
   }
   getAadhar(adharDetails: any): Observable<any> {
-    return this.httpService.post("api/kyc/adhaar", adharDetails);
+    return this.httpService.post("kyc/adhaar", adharDetails);
   }
   getBankStatementAnalysis(request: DocRequest): Observable<any> {
     return this.httpService.post("doc/bs/analyze", request);
   }
-  getAA(request: DocRequest): Observable<any> {
-    return this.httpService.post("finvu/consent", request);
+  loginAA(request: DocRequest): Observable<any> {
+    return this.httpService.post("aa/call", request);
   }
-  fetchAAData(request: DocRequest): Observable<any> {
-    return this.httpService.post("finvu/fetchData", request);
+  consentAAData(request: DocRequest): Observable<any> {
+    return this.httpService.post(`aa/consent-details/${request.mobileNumber}`);
   }
 }

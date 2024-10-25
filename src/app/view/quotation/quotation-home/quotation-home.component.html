@@ -1,10 +1,15 @@
-<div>
+<div *ngIf="!fileFlag">
   <div class="row h155" style="background-color: #FFFFFF;padding: 15px;">
         <h5 class="row fs16 fw600 primColor">Upload your quotation</h5>
-       <app-upload></app-upload>
+       <app-upload (fileFlag)="fileUpload($event)"></app-upload>
       </div>
 </div>
 
+<div *ngIf="fileFlag">
+      <img style="height: 400px;" src="assets/icons/Quotation.webp">
+
 <div class="row mt20" layout="column" layout-align="center center" style="gap: 10px;">
-      <h5 (click)="redirect()">Offers</h5>
+      <button (click)="redirect()">Save</button>
+</div>
+
 </div>
