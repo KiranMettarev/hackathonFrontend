@@ -1,4 +1,4 @@
-<div *ngIf="!showUploadType">
+<div *ngIf="!showUploadType && !analysisFlag">
      <div 
       class="row"
       style="height: 262px; background-color: #FFFFFF;"
@@ -22,6 +22,8 @@
 </div>
 
  <div *ngIf="showUploadType"><app-aa-integration (aaFetchFlag)="aaFetch($event)"  (callback)="callBackAA($event)"></app-aa-integration></div>
+
+ <div *ngIf="analysisFlag"><app-analysis (step)="step2($event)"></app-analysis></div>
 
 
 <!-- ----graph----

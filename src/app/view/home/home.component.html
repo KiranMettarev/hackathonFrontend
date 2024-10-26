@@ -23,7 +23,7 @@
 
  
   <div *ngIf="step == 2" class="col" style="padding: 10px 10px;">
-    <app-bank-home (step)=stepVal($event)></app-bank-home>
+    <app-bank-home (abc)=abc($event)  (step)=stepVal($event)></app-bank-home>
   </div>
 
   <div *ngIf="step == 3" class="col" style="padding: 50px 34px;">

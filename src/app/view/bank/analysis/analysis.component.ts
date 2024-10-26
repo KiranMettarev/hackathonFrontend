@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import ApexCharts from "apexcharts";
+import { DocAPIService } from '../../../services/doc-api.service';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -9,6 +11,8 @@ import ApexCharts from "apexcharts";
 })
 export class AnalysisComponent {
 
+   @Output() step = new EventEmitter();
+    private destroy$ = new Subject<void>();
    options:any = {};
    chart: any;
 
@@ -48,7 +52,16 @@ export class AnalysisComponent {
     { title: "Result", key: "result" },
   ];
 
+   constructor(
+    private docAPIService: DocAPIService,
+  ) {}
+
    ngOnInit(): void {
+    for (let i = 0; i < 5; i++) {
+    setTimeout(() => this.ConsentStatus(), i * 5000);
+}
+
+
     setTimeout(() => {
        this.initChartData()
     }, 1000);
@@ -59,6 +72,43 @@ export class AnalysisComponent {
     this.calculateData()
     this.calculateArrValues()
    }
+
+   ConsentStatus(): void {
+    this.docAPIService
+      .checkConsent()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data: any) => {
+
+      console.log("Consent - data from Finvu");
+      console.log(data);
+
+          // console.log("Fetched block:", block);
+
+          // const data = block.body;
+          // this.baseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          //   data.url!,
+          // );
+          // console.log("Base URL set:", this.baseUrl);
+          // this.showIframe = true;
+          // this.previousUrl = this.baseUrl as string;
+          // setTimeout(() => {
+          //   if (this.iframeRef) {
+          //     this.aaRequestData = data.analysis;
+          //     this.monitorIframeUrlChange();
+          //      this.aaFetchFlag.emit(true)
+          //   }
+          // }, 100);
+        },
+        error: (err) => {
+          // console.error("Error fetching data:", err);
+          // this.aaFetchFlag.emit(false)
+        },
+      });
+   }
+  // destroy$(destroy$: any): import("rxjs").OperatorFunction<any, any> {
+  //   throw new Error('Method not implemented.');
+  // }
 
     calculateData(){
     let totalCredit = 0;
@@ -198,7 +248,7 @@ console.log("Average Monthly Balances:", averageMonthlyBalances);
       legend: { show: true,position:'top',horizontalAlign:'right' },
       xaxis: {
         labels: {
-          rotate: 0
+          rotate: -45
         },
         // categories: ["Oct 2022", "Nov 2022", "Dec 2022", "Jan 2023","Feb 2023", "Mar 2023", "Apr 2023"],
         categories: this.monthsArr
@@ -213,9 +263,9 @@ console.log("Average Monthly Balances:", averageMonthlyBalances);
         this.chart.render();
   }
 
-  //   next(iVal: number): void {
-  //   this.step.emit(iVal)
-  // }
+    next(iVal: number): void {
+    this.step.emit(iVal)
+  }
 }
 
 export type Header = {

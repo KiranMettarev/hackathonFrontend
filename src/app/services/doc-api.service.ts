@@ -32,4 +32,7 @@ export class DocAPIService {
   consentAAData(request: DocRequest): Observable<any> {
     return this.httpService.post(`aa/consent-details/${request.mobileNumber}`);
   }
+  checkConsent(): Observable<any> {
+    return this.httpService.get("aa/check-consent-status");
+  }
 }

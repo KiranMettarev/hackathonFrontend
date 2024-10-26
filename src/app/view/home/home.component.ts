@@ -93,6 +93,10 @@ export class HomeComponent {
       
   }
 
+  abc(iVal:number):void {
+    this.step = iVal
+  }
+
   // aadhaarDataFlag: boolean = false
   // panDataFlag: boolean = false
   // adharDetails!: AadhaarDetails
