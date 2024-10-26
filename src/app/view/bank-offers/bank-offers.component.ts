@@ -8,10 +8,14 @@ import { Component } from '@angular/core';
 export class BankOffersComponent {
 
   loadingFlag: boolean = true;
+  endFlag: boolean = false;
 
   ngOnInit(): void {
     setTimeout(() => {
       this.loadingFlag = false
     }, 5000);
+  }
+  selectBank(){
+    this.endFlag = true
   }
 }
