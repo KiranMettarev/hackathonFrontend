@@ -16,6 +16,11 @@ export class AnalysisComponent {
    bankDetails: any
    aaDataFlag : boolean = true
 
+   monthsArr!: string[]
+   totalDebitArr !: number[]
+   totalCreditArr !: number[]
+   averageMonthlyBalancesArr !: number[]
+
 
     bankCheks = ['Bank statement is authentic', 'Regular income confirmed', 'No negative balance observed', 'No inward bounces detected', 'No outward bounces detected']
 
@@ -52,6 +57,7 @@ export class AnalysisComponent {
     console.log(this.data, "data")
 
     this.calculateData()
+    this.calculateArrValues()
    }
 
     calculateData(){
@@ -87,18 +93,43 @@ this.bankDetails = Object.entries(financialSummary);
 console.log(this.bankDetails, "bankDetails");
    }
 
+   calculateArrValues(): void {
+    const months = this.data. monthlySummary.map((item: { month: { split: (arg0: string) => [any, any]; }; }) => {
+    const [fullMonth, year] = item.month.split(" ");
+    const monthAbbreviation = fullMonth.slice(0, 3);
+    return `${monthAbbreviation} ${year}`;
+});
+
+    const totalDebitAmounts = this.data.monthlySummary.map((item: { totalDebitAmount: any; }) => item.totalDebitAmount);
+    const totalCreditAmounts = this.data.monthlySummary.map((item: { totalCreditAmount: any; }) => item.totalCreditAmount);
+    const averageMonthlyBalances = this.data.monthlySummary.map((item: { averageMonthlyBalance: any; }) => item.averageMonthlyBalance);
+
+    console.log("Months:", months);
+console.log("Total Debit Amounts:", totalDebitAmounts);
+console.log("Total Credit Amounts:", totalCreditAmounts);
+console.log("Average Monthly Balances:", averageMonthlyBalances);
+
+   this.monthsArr = months
+   this.totalDebitArr = totalDebitAmounts
+   this.totalCreditArr = totalCreditAmounts
+   this.averageMonthlyBalancesArr = averageMonthlyBalances
+   }
+
   initChartData(): void {
     console.error('Chart Load Call')
     this.options = {
       series: [{
         name: 'Total Debit',
-        data: ['81578.5', '81862.14', '705768.97', '279885.39','78501.18', '144600.03', '0']
+        // data: ['81578.5', '81862.14', '705768.97', '279885.39','78501.18', '144600.03', '0']
+        data: this.totalDebitArr
       },{
           name: 'Total Credit',
-          data: ['81703.25', '130483', '949453', '1819','65811', '228708', '306']
+          // data: ['81703.25', '130483', '949453', '1819','65811', '228708', '306']
+          data: this.totalCreditArr
       },{
         name: 'Average Monthly Balances',
-        data: ['604.57', '49225.43', '292909.46', '14843.07','2152.89', '86260.86', '86566.86']
+        // data: ['604.57', '49225.43', '292909.46', '14843.07','2152.89', '86260.86', '86566.86']
+        data: this.averageMonthlyBalancesArr
     }],
       chart: {
       height: '380px',
@@ -169,7 +200,8 @@ console.log(this.bankDetails, "bankDetails");
         labels: {
           rotate: 0
         },
-        categories: ["Oct 2022", "Nov 2022", "Dec 2022", "Jan 2023","Feb 2023", "Mar 2023", "Apr 2023"],  
+        // categories: ["Oct 2022", "Nov 2022", "Dec 2022", "Jan 2023","Feb 2023", "Mar 2023", "Apr 2023"],
+        categories: this.monthsArr
       },
       tooltip: {
         // y: {
