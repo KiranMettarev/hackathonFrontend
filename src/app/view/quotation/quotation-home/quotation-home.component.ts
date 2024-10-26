@@ -10,9 +10,20 @@ export class QuotationHomeComponent {
   constructor( private router: Router,) {}
 
   fileFlag: boolean = false
+  validationFlag: boolean = false
+
+  checkObj =
+    {
+      'Mobile Number': 9421954165,
+      'Amount': 80000,
+      'Account Number': 6050220088
+    }
+    dataEntries!: any
+  
 
   ngOnInit(){
     console.log(this.fileFlag, "console")
+     this.dataEntries = Object.entries(this.checkObj);
   }
 
   redirect(): void {

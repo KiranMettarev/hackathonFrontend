@@ -49,3 +49,12 @@ button{
   padding: 0 5px;
   height: 30px;
 }
+
+.tableHead {
+    width: 100%;
+    background-color: #ededed;
+}
+
+.tableBody {
+    scrollbar-gutter: unset;
+}

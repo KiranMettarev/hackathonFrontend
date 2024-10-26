@@ -5,11 +5,67 @@
       </div>
 </div>
 
-<div *ngIf="fileFlag">
-      <img style="height: 400px;" src="assets/icons/Quotation.webp">
+<div class="row" *ngIf="fileFlag && !validationFlag" layout="column" layout-align="center center">
+     <div class="col pad15" style="background-color: #FFFFFF;">
+       <img style="height: 400px;" src="assets/icons/Quotation.webp">
+     </div>
 
-<div class="row mt20" layout="column" layout-align="center center" style="gap: 10px;">
-      <button (click)="redirect()">Save</button>
+<div class="row mt30" layout="column" layout-align="center center" style="gap: 10px;">
+      <button style="width: auto;" (click)="validationFlag = true">Validate Quotation</button>
 </div>
 
+</div>
+
+<div class="row" *ngIf="validationFlag">
+      <div class="row" style="background-color: #FFFFFF;height: 320px;">
+<div class="row padt20" layout="column" layout-align="start center" style="gap: 10px;height: 70px;">
+      <h5 class="fs16 fw500 primColor">Quotation validation</h5>
+      <h5 class="fs14 fw400 textPC">Your Quotation validate successfuly</h5>
+</div>
+
+<div class="mt20 row" style="height: calc(100% -70px);">
+      <div class="tableHead h40">
+            <div  class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center" style="width: 40%;">Upload</div>
+            <div  class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"  style="width: 40%;">Validate</div>
+            <div  class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center" style="width: 20%;">Check</div>
+      </div>
+      <div class="tableBody">
+            <div class="tableRow borderLR h60" style="height: 50px;" *ngFor="let item of dataEntries;">
+        <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+                  style="width: 40%;"
+          >
+          {{item[0]}}
+          </div>
+
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            style="width: 40%;"
+          >
+          {{item[1]}}
+          </div>
+   <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="center center"
+          style="width: 20%;"
+          >
+             <img src="assets/icons/check_circle.svg">
+          </div>
+      </div>
+      </div>
+</div>
+</div>
+
+<div class="row mt30" layout="row" layout-align="center center"><button style="width: auto;" (click)="redirect()">Submitte Loan Application</button></div>
 </div>
