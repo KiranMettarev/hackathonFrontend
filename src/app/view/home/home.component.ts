@@ -46,10 +46,6 @@ export class HomeComponent {
     this.billFlag = false
   }
 
-  // callBackAA(ival: CallBackEvent): void {
-  //   this.showUploadType = false
-  // }
-
   selectedFileName: string = "";
   fileSelected: boolean = false;
   formData!: FormData;
@@ -92,27 +88,5 @@ export class HomeComponent {
       console.log(this.step);
       
   }
-
-  abc(iVal:number):void {
-    this.step = iVal
-  }
-
-  // aadhaarDataFlag: boolean = false
-  // panDataFlag: boolean = false
-  // adharDetails!: AadhaarDetails
-  // panDetails!: PanDetails
-
-  // aadhaarInfo(adhar: AadhaarDetails): void {
-  //   this.adharDetails = adhar
-  //   this.aadhaarDataFlag = true
-  //   console.log(adhar, "workAdhar");
-    
-  // }
-
-  // panInfo(pan: PanDetails): void {
-  //    this.panDetails = pan
-  //   this.panDataFlag = true
-  //   console.log(pan, "workPan");
-  // }
 
 }

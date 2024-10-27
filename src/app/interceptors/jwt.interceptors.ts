@@ -15,36 +15,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes("/otp/authenticate") || req.url.includes("/refresh") || req.url.includes("/otp/generateOtp")) {
     return next(req);
   }
-
   return enrichWithAccessToken(authService, req, next);
 };
-// export const unauthErrorInterceptor: HttpInterceptorFn = (
-//   req: HttpRequest<unknown>,
-//   next: HttpHandlerFn,
-// ): Observable<HttpEvent<unknown>> => {
-//   const authService: AuthService = inject(AuthService);
 
-//   return next(req).pipe(
-//     catchError((error: HttpErrorResponse) => {
-//       if (
-//         error instanceof HttpErrorResponse &&
-//         // this will avoid an infinite loop when the accessToken expires.
-//         !(req.url.includes("/otp/authenticate") || req.url.includes("/refresh") || req.url.includes("/otp/generateOtp")) &&
-//         error.status === 401
-//       ) {
-//         return authService
-//           .refreshToken()
-//           .pipe(
-//             switchMap((_it) => enrichWithAccessToken(authService, req, next)),
-//           );
-//       }
-
-//       return throwError(() => error);
-//     }),
-//   );
-// };
-
-// -------------------------------
 function enrichWithAccessToken(
   authService: AuthService,
   req: HttpRequest<unknown>,
@@ -65,21 +38,3 @@ function enrichWithAccessToken(
     .pipe(switchMap((req) => next(req)));
 }
 
-// function enrichWithAccessToken(
-//   authService: AuthService,
-//   req: HttpRequest<unknown>,
-//   next: HttpHandlerFn,
-// ): Observable<HttpEvent<unknown>> {
-//   // Get the stored access token from authService
-//   const accessToken = authService.getAccessToken();
-
-//   // Clone the request with the Authorization header
-//   const clonedRequest = req.clone({
-//     setHeaders: {
-//       authorization: `Bearer ${accessToken}`,
-//     },
-//   });
-
-//   // Pass the cloned request to the next handler
-//   return next(clonedRequest);
-// }

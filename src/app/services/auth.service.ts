@@ -3,14 +3,11 @@ import { HttpService } from "./http.service";
 import {
   Observable,
   catchError,
-  firstValueFrom,
   from,
   map,
   switchMap,
   throwError,
-  zipWith,
 } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
 import { LocalStorageService } from "./local-storage.service";
 import { ErrorHandlerService } from "./error-handler.service";
 import { LoginForm, UserModel } from "../models/user-details";
@@ -34,27 +31,7 @@ export class AuthService {
     );
   }
 
-  // login(loginRequest: LoginForm): Observable<any> {  
-  //   return this.http.post<any>("api/otp/authenticate", loginRequest).pipe(
-  //     switchMap((r) => {console.log(r, "r");
-  //      return this.localStorage.insert(this.storageKey, r)} ),
-  //     catchError((error: unknown) =>
-  //       throwError(() => this.errorHandler.handleAuthError(error)),
-  //     ),
-  //   );
-  // }
   private accessToken: string | null = null;
-
-   // This method retrieves the token (could be from memory, local storage, etc.)
-  //  getAccessToken(): string | null {
-  //   return this.accessToken || localStorage.getItem('accessToken');
-  // }
-
-  // This method stores the token after login
-  // setAccessToken(token: string): void {
-  //   this.accessToken = token;
-  //   localStorage.setItem('accessToken', token);
-  // }
 
 generateOTP(mobileNumber: string): Observable<OtpResponse> {
   return this.http.post<OtpResponse>("otp/generateOtp", { mobileNumber }).pipe(
@@ -73,46 +50,6 @@ generateOTP(mobileNumber: string): Observable<OtpResponse> {
 
   currentLoggedInUser(): Observable<LoginResponse> {
     return from(this.localStorage.get<LoginResponse>(this.storageKey));
-  }
-
-  // refreshToken(): Observable<LoginResponse> {
-  //   const state$ = this.currentLoggedInUser();
-  //   return state$
-  //     .pipe(map((state) => state.tokens.refreshToken))
-  //     .pipe(switchMap((refreshToken) => this.reissueToken(refreshToken)))
-  //     .pipe(map((it) => it.accessToken))
-  //     .pipe(zipWith(state$))
-  //     .pipe(map((cons) => this.updateState(cons)))
-  //     .pipe(
-  //       switchMap((updated) => this.storeAuthState(updated)),
-  //       catchError((error: unknown) => {
-  //         if (!(error instanceof HttpErrorResponse && error.status === 400)) {
-  //           this.localStorage.remove(this.storageKey);
-  //           if (confirm("Session expire Please re-login"))
-  //             window.location.reload();
-  //         }
-
-  //         return throwError(() => error);
-  //       }),
-  //     );
-  // }
-
-  private storeAuthState(updated: LoginResponse): Promise<LoginResponse> {
-    return this.localStorage.update(this.storageKey, updated);
-  }
-
-  // private updateState(cons: [arg: string, LoginResponse]) {
-  //   const [accessToken, state] = cons;
-  //   state.tokens.accessToken = accessToken;
-  //   return state;
-  // }
-
-  private reissueToken(
-    refreshToken: string,
-  ): Observable<{ accessToken: string }> {
-    return this.http.post<{ accessToken: any }>("refresh", {
-      refreshToken,
-    });
   }
 
   toModel(userDetails: UserDetails): {
@@ -140,7 +77,6 @@ generateOTP(mobileNumber: string): Observable<OtpResponse> {
 
 export type LoginResponse = {
   tokens: Tokens;
-  // tokens: string;
 };
 
 export type OtpResponse = {
@@ -149,7 +85,6 @@ export type OtpResponse = {
 
 export type Tokens = {
   accessToken: string;
-  // refreshToken: string;
 };
 export type UserDetails = {
   id: string;

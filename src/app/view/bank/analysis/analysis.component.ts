@@ -49,7 +49,7 @@ export class AnalysisComponent {
   ];
 
    headerArr2: Header[] = [
-    { title: "status", key: "status" },
+    { title: "Status", key: "status" },
     { title: "Result", key: "result" },
   ];
 
@@ -58,17 +58,29 @@ export class AnalysisComponent {
   ) {}
 
    ngOnInit(): void {
-    for (let i = 0; i < 5; i++) {
-   if(!this.dataReceivedFlag){
-     setTimeout(() => this.ConsentStatus(), i * 5000);
-   }
-}
+  //   for (let i = 0; i < 5; i++) {
+  //  if(!this.dataReceivedFlag){
+  //    setTimeout(() => this.ConsentStatus(), i * 5000);
+  //  }
+// }
 
      console.log(this.sampleData, "sampleData")
-  // this.data = JSON.parse(this.sampleData.content[0].text);
+  this.data = JSON.parse(this.sampleData.content[0].text);
     console.log(this.data, "data")
 
-   
+    if(this.data.monthlySummary.length > 0){
+          this.dataReceivedFlag = true
+           this.calculateData()
+           this.calculateArrValues()
+
+
+    setTimeout(() => {
+       this.initChartData()
+    }, 1000);
+        } else {
+          console.log("eeeeeeeeeeerrrrrrrrrrrrrrroooooooooorrrrrr");
+          
+        }
    }
 
    ConsentStatus(): void {
@@ -86,7 +98,7 @@ export class AnalysisComponent {
         if(this.data.monthlySummary.length > 0){
           this.dataReceivedFlag = true
            this.calculateData()
-    this.calculateArrValues()
+           this.calculateArrValues()
 
 
     setTimeout(() => {
@@ -96,24 +108,6 @@ export class AnalysisComponent {
           console.log("eeeeeeeeeeerrrrrrrrrrrrrrroooooooooorrrrrr");
           
         }
-
-
-          // console.log("Fetched block:", block);
-
-          // const data = block.body;
-          // this.baseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          //   data.url!,
-          // );
-          // console.log("Base URL set:", this.baseUrl);
-          // this.showIframe = true;
-          // this.previousUrl = this.baseUrl as string;
-          // setTimeout(() => {
-          //   if (this.iframeRef) {
-          //     this.aaRequestData = data.analysis;
-          //     this.monitorIframeUrlChange();
-          //      this.aaFetchFlag.emit(true)
-          //   }
-          // }, 100);
         },
         error: (err) => {
           // console.error("Error fetching data:", err);
@@ -121,9 +115,6 @@ export class AnalysisComponent {
         },
       });
    }
-  // destroy$(destroy$: any): import("rxjs").OperatorFunction<any, any> {
-  //   throw new Error('Method not implemented.');
-  // }
 
     calculateData(){
     let totalCredit = 0;

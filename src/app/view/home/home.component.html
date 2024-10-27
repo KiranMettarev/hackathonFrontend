@@ -14,16 +14,13 @@
     </div>
   </div>
 
-
-
   <div class="row" style=" height: calc(100% - 137px); overflow-y: auto;overflow-x: hidden;">
     <div class="col" *ngIf="step == 1" style="padding: 20px 10px;" >  
       <app-kyc-home (step)=stepVal($event)></app-kyc-home>
   </div>
-
  
   <div *ngIf="step == 2" class="col" style="padding: 20px 10px;">
-    <app-bank-home (abc)=abc($event)  (step)=stepVal($event)></app-bank-home>
+    <app-bank-home (step)=stepVal($event)></app-bank-home>
   </div>
 
   <div *ngIf="step == 3" class="col" style="padding: 20px 10px;">

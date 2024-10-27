@@ -71,21 +71,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.isSubmited = true;
-    // this.credential = this.form.value as LoginForm;
     this.mobileNumber = this.form.value.mobileNumber!;
     this.otpSent = true;
-
-    // if (this.form.valid) {
-    //   this.loginService.generateOTP(this.credential.mobileNumber).subscribe({
-    //     next: (otp) => {
-    //       console.log(otp, "otp------------------------")
-    //     },
-    //     error: ({ error }) => {
-    //       this.errorMsg = error?.data[0].message;
-    //       this.errorFlag = true;
-    //     },
-    //   });
-    // }
 
     if (this.form.valid) {
       this.authService.generateOTP(this.mobileNumber).subscribe({
@@ -104,13 +91,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
       });
     }
-
-
   }
 
   autoFillOtp(otp: string) {
   if (this.otpInput) {
-    this.otpInput.setValue(otp); // Set the OTP in the input
+    this.otpInput.setValue(otp);
   }
 }
 
@@ -132,7 +117,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isAlphabetFlag = true;
     return false;
   }
-  // this.router.navigate(['user']);
 
   verifyAndFetchDetails(): void {
     console.log(this.otp, "finalOTP-----")
@@ -142,7 +126,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.login( this.credential ).subscribe({
         next: (res) => {
           console.log(res, "responce----")
-          // this.router.navigate(['user']);
         },
         error: ({ error }) => {
           console.log(error, "error---")
@@ -151,7 +134,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
       });
     }
-
   }
 
   backStep(): void {

@@ -88,12 +88,6 @@ export class PanComponent {
     if (this.panForm.valid) {
       this.isLoading = true;
       this.loadingMsg = true;
-      const formValue = this.panForm.getRawValue();
-      // const reqParam: DocRequest = {
-      //   blockId: this.block.id,
-      //   ...formValue,
-      // };
-      // this.getPanDetails(reqParam);
     }
   }
 panNumber!: string 

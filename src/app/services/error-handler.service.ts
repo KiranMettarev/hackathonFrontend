@@ -52,7 +52,7 @@ export class ErrorHandlerService {
         message: "OTP Request Failed",
         data: [
           {
-            message: otpErrorMessage, // The specific message for OTP errors
+            message: otpErrorMessage,
             path: [""],
           },
         ],
