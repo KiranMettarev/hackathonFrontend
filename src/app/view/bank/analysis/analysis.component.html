@@ -1,5 +1,5 @@
 <!-- ----graph---- -->
- <div class="col" style="overflow-y: auto;">
+ <div class="col" style="overflow-y: auto;" *ngIf="dataReceivedFlag">
 <div *ngIf="aaDataFlag">
   <div class="row" layout="row" layout-align="start center" style="height: 50px;">
  <h5 class="fs16 fw600 primColor">Bank Details</h5>
@@ -30,20 +30,20 @@
       </div>
       <div class="tableBody" style="height: calc(100% - 40px);">
         <div class="tableRow borderLR" style="height: 46px;" *ngFor="let item of bankDetails; index as i">
-          <div
+          <!-- <div
               class="tableCell label fw500 col"
               layout="row"
               layout-align="start center"
               [style.width]="colconfig1[0]"
             >
               {{ i+1 }}
-            </div>
+            </div> -->
 
             <div
               class="tableCell label fw500 col"
               layout="row"
               layout-align="start center"
-              [style.width]="colconfig1[1]"
+              [style.width]="colconfig1[0]"
             >
             {{ item[0] }}
             </div>
@@ -52,7 +52,7 @@
               class="tableCell label fw500 col"
               layout="row"
               layout-align="start center"
-              [style.width]="colconfig1[2]"
+              [style.width]="colconfig1[1]"
             >
             {{ item[1] | number:'1.2-2' }}
             </div>
@@ -103,6 +103,11 @@
       </div>
     </div>
  </div>
+ </div>
+
+ <div class="col" *ngIf="!dataReceivedFlag" layout="column" layout-align="center center" >
+    <div class="fs20 fw400 textPC" style="text-align: center;">Please wait...</div>
+    <div class="loading-spinner mt30"></div>
  </div>
 
 
