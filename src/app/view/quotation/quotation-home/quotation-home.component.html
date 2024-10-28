@@ -25,31 +25,31 @@
     layout-align="center center"
     style="gap: 10px"
   >
-    <button style="width: auto" (click)="validationFlag = true">
+    <button class="button fs14" style="width: auto" (click)="validationFlag = true">
       Validate
     </button>
   </div>
 </div>
 
 <div class="row" *ngIf="validationFlag">
-  <div class="row" style="background-color: #ffffff; height: 280px">
+  <div class="row" style="background-color: #ffffff; height: 200px">
     <div
       class="row padt20"
       layout="column"
       layout-align="start center"
       style="gap: 10px; height: 40px"
     >
-      <h5 class="fs16 fw500 primColor">Quotation Validated Successfully</h5>
+      <h5 class="fs16 fw500 primColor">Quotation validated successfully.</h5>
       <!-- <h5 class="fs14 fw400 textPC">Your Quotation validate successfuly</h5> -->
     </div>
 
-    <div class="mt20 row" style="height: calc(100% -40px)">
+    <div class="mt20 row" style="height: calc(100% -70px)">
       <div class="tableHead h40">
         <div
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: 120px"
+          style="width: 30%"
         >
           Field
         </div>
@@ -57,7 +57,7 @@
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: 120px"
+          style="width: 42%"
         >
           Value
         </div>
@@ -65,7 +65,7 @@
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: calc(100% - 240px)"
+          style="width: 28%"
         >
           Validation
         </div>
@@ -80,7 +80,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="start center"
-            style="width: 120px"
+            style="width: 30%"
           >
             {{ item[0] }}
           </div>
@@ -89,7 +89,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="start center"
-            style="width: 120px"
+            style="width: 42%"
           >
             {{ item[1] }}
           </div>
@@ -97,7 +97,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="center center"
-            style="width: calc(100% - 240px)"
+            style="width: 28%"
           >
             <img src="assets/icons/check_circle.svg" />
           </div>
@@ -107,7 +107,7 @@
   </div>
 
   <div class="row mt30" layout="row" layout-align="center center">
-    <button style="width: auto" (click)="redirect()">
+    <button class="button fs14" style="width: auto" (click)="redirect()">
       Submit Loan Application
     </button>
   </div>

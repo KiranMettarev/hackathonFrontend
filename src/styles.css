@@ -163,7 +163,7 @@ div[hidden] {
   border-radius: 4px;
   width: 100%;
   color: var(--white);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   cursor: pointer;
 }

@@ -14,9 +14,8 @@ export class QuotationHomeComponent {
 
   checkObj =
     {
-      'Mobile Number': 9421954165,
-      'Amount': 80000,
-      'Account Number': 6050220088
+      'Mob. No': 9421954165,
+      'Acct. No': 6050220088
     }
     dataEntries!: any
   
