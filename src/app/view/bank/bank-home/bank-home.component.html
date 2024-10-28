@@ -1,27 +1,34 @@
 <div *ngIf="!showUploadType && !analysisFlag">
-     <div 
-      class="row"
-      style="height: 262px; background-color: #FFFFFF;"
-      layout="column"
-      layout-align="center center"
+  <div
+    class="row"
+    style="height: 262px; background-color: #ffffff"
+    layout="column"
+    layout-align="center center"
+  >
+    <h5 class="fs20 fw400 textPC">Bank Statement is not uploaded yet.</h5>
+    <h5 class="fs15 fw400 textPC" style="margin: 20px 0px">
+      Add a bank Statement to proceed
+    </h5>
+    <button
+      class="button fs14 fw700"
+      style="width: 180px"
+      (click)="addAccount()"
     >
-      <h5 class="fs20 fw400 textPC">
-        Bank Statement is not uploaded yet.
-      </h5>
-      <h5
-        class="fs15 fw400 textPC"
-        style="margin: 20px 0px"
-      >
-        Add a bank Statement to proceed
-      </h5>
-      <button class="button fs14 fw700" style="width: 180px" (click)="addAccount()">
-        Add Account
-      </button>
-      <span class="fs13 fw400 mt5 textPC">Discovery using Account Aggregator</span>
-    </div>
+      Add Account
+    </button>
+    <span class="fs13 fw400 mt5 textPC"
+      >Discovery using Account Aggregator</span
+    >
+  </div>
 </div>
 
- <div *ngIf="showUploadType"><app-aa-integration (aaFetchFlag)="aaFetch($event)"  (callback)="callBackAA($event)"></app-aa-integration></div>
+<div *ngIf="showUploadType">
+  <app-aa-integration
+    (aaFetchFlag)="aaFetch($event)"
+    (callback)="callBackAA($event)"
+  ></app-aa-integration>
+</div>
 
- <div *ngIf="analysisFlag"><app-analysis (step)="next($event)"></app-analysis></div>
-
+<div *ngIf="analysisFlag">
+  <app-analysis (step)="next($event)"></app-analysis>
+</div>

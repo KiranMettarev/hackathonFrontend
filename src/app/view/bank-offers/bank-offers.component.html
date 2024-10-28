@@ -1,28 +1,86 @@
-<div *ngIf="!loadingFlag && !endFlag" class="col" style="height:calc(100% - 137px);">
-        <div class="height" style="height:50px;" layout="row" layout-align="start center">
-            <h5 class="fs16 fw600">Available Loan Offers</h5>
+<div
+  *ngIf="!loadingFlag && !endFlag"
+  class="col"
+  style="height: calc(100% - 137px)"
+>
+  <div
+    class="height"
+    style="height: 50px"
+    layout="row"
+    layout-align="start center"
+  >
+    <h5 class="fs16 fw600">Available Loan Offers</h5>
+  </div>
+  <div class="height" style="height: calc(100% - 50px)">
+    <div
+      class="height"
+      *ngFor="let offer of bankofferArr; index as i"
+      (click)="selectBank(offer)"
+      layout="row"
+      layout-align="start center"
+      style="
+        height: 100px;
+        width: 100%;
+        background: #fff;
+        margin-bottom: 15px;
+        padding: 0px 15px;
+        border-radius: 10px;
+      "
+    >
+      <div
+        class=""
+        style="width: auto"
+        layout="row"
+        layout-align="start center"
+      >
+        <div
+          class=""
+          layout="row"
+          layout-align="center center"
+          style="height: 60px; width: 60px; border-radius: 50px"
+        >
+          <img
+            src="{{ offer.img }}"
+            class=""
+            style="height: 60px; width: 100%"
+          />
         </div>
-        <div class="height" style="height:calc(100% - 50px)">
-            <div class="height" *ngFor="let offer of bankofferArr; index as i" (click)="selectBank(offer)" layout="row" layout-align="start center" style="height:100px;width:100%;background:#fff;margin-bottom: 15px;padding: 0px 15px;border-radius: 10px;">
-                <div class="" style="width:auto;" layout="row" layout-align="start center">
-                    <div class="" layout="row" layout-align="center center" style="height: 60px;width: 60px;border-radius: 50px;">
-                        <img src="{{offer.img}}" class="" style="height:60px;width:100%">
-                    </div>
-                </div>
-                <div class="" style="width:auto;padding-left:10px;" layout="column" layout-align="center start">
-                    <h5 class="fs16 fw600">{{offer.TITLE}}</h5>
-                    <h5 class="fs12 fw500" style="color:#2F4F4F;">{{offer.desc}}</h5>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div
+        class=""
+        style="width: auto; padding-left: 10px"
+        layout="column"
+        layout-align="center start"
+      >
+        <h5 class="fs16 fw600">{{ offer.TITLE }}</h5>
+        <h5 class="fs12 fw500" style="color: #2f4f4f">{{ offer.desc }}</h5>
+      </div>
+    </div>
+  </div>
 </div>
 
-    <!-- -----------Loading----- -->
-   <div *ngIf="loadingFlag && !endFlag" style="height: 515px; padding: 0 34px;" layout="column" layout-align="center center" >
-      <div class="fs20 fw400 textPC" style="text-align: center;">We’re on it! Fetching the best loan offers for you...</div>
-      <div class="loading-spinner mt30"></div>
-    </div>
+<!-- -----------Loading----- -->
+<div
+  *ngIf="loadingFlag && !endFlag"
+  style="height: 515px; padding: 0 34px"
+  layout="column"
+  layout-align="center center"
+>
+  <div class="fs20 fw400 textPC" style="text-align: center">
+    We’re on it! Fetching the best loan offers for you...
+  </div>
+  <div class="loading-spinner mt30"></div>
+</div>
 
-<div *ngIf="endFlag" style="height: 515px; padding: 0 20px;" layout="column" layout-align="center center" >
-      <div class="fs20 fw400 textPC" style="text-align: center;">Congratulations! Your loan application is submitted to {{selectedBankName}}. Their representative will be in touch with you shortly for further processing.</div>
+<div
+  *ngIf="endFlag"
+  style="height: 515px; padding: 0 20px"
+  layout="column"
+  layout-align="center center"
+>
+  <div class="fs20 fw400 textPC" style="text-align: center">
+    Congratulations! Your loan application is submitted to
+    {{ selectedBankName }}. Their representative will be in touch with you
+    shortly for further processing.
+  </div>
 </div>

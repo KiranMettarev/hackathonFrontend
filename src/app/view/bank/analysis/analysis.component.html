@@ -1,35 +1,47 @@
 <!-- ----graph---- -->
- <div class="col" style="overflow-y: auto;" *ngIf="dataReceivedFlag">
-<div *ngIf="aaDataFlag">
-  <div class="row" layout="row" layout-align="start center" style="height: 50px;">
- <h5 class="fs16 fw600 primColor">Bank Details</h5>
-</div>
-<div class="row">
-  <div id="smallChart" class="contain" style="background-color: #fff;margin-bottom: 20px;">
-    <div id="chartnew"></div>
-</div>
-</div>
-</div>
+<div class="col" style="overflow-y: auto" *ngIf="dataReceivedFlag">
+  <div *ngIf="aaDataFlag">
+    <div
+      class="row"
+      layout="row"
+      layout-align="start center"
+      style="height: 50px"
+    >
+      <h5 class="fs16 fw600 primColor">Bank Details</h5>
+    </div>
+    <div class="row">
+      <div
+        id="smallChart"
+        class="contain"
+        style="background-color: #fff; margin-bottom: 20px"
+      >
+        <div id="chartnew"></div>
+      </div>
+    </div>
+  </div>
 
-
-  <div *ngIf="aaDataFlag" style="gap: 20px;">
-    <div class="row" layout-align="start center" style="height: 50px;">
+  <div *ngIf="aaDataFlag" style="gap: 20px">
+    <div class="row" layout-align="start center" style="height: 50px">
       <h5 class="fs16 fw600 primColor">Avarage Bank Details</h5>
     </div>
-    <div class="row" style="height: 270px;">
-      <div class="tableHead tableTitle h40" style="width: 100%;">
+    <div class="row" style="height: 270px">
+      <div class="tableHead tableTitle h40" style="width: 100%">
         <div
-            class="col label fw600 secColor"
-            layout="row"
-            layout-align="start center"
-            *ngFor="let headcell of headerArr1; index as i"
-            [style.width]="colconfig1[i]"
-          >
-            {{ headcell.title }}
-          </div>
+          class="col label fw600 secColor"
+          layout="row"
+          layout-align="start center"
+          *ngFor="let headcell of headerArr1; index as i"
+          [style.width]="colconfig1[i]"
+        >
+          {{ headcell.title }}
+        </div>
       </div>
-      <div class="tableBody" style="height: calc(100% - 40px);">
-        <div class="tableRow borderLR" style="height: 46px;" *ngFor="let item of bankDetails; index as i">
+      <div class="tableBody" style="height: calc(100% - 40px)">
+        <div
+          class="tableRow borderLR"
+          style="height: 46px"
+          *ngFor="let item of bankDetails; index as i"
+        >
           <!-- <div
               class="tableCell label fw500 col"
               layout="row"
@@ -39,75 +51,99 @@
               {{ i+1 }}
             </div> -->
 
-            <div
-              class="tableCell label fw500 col"
-              layout="row"
-              layout-align="start center"
-              [style.width]="colconfig1[0]"
-            >
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig1[0]"
+          >
             {{ item[0] }}
-            </div>
+          </div>
 
-            <div
-              class="tableCell label fw500 col"
-              layout="row"
-              layout-align="start center"
-              [style.width]="colconfig1[1]"
-            >
-            {{ item[1] | number:'1.2-2' }}
-            </div>
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig1[1]"
+          >
+            {{ item[1] | number : "1.2-2" }}
+          </div>
         </div>
       </div>
     </div>
-<div class="row" layout="row" layout-align="start center" style="height: 50px;">
- <h5 class="fs16 fw600 primColor">Federal Credit Union</h5>
-</div>
-    <div class="row" style="height: 282px;">
-      <div class="tableHead tableTitle h40" style="width: 100%;">
-            <div
-            class="col label fw600 secColor"
-            layout="row"
-            layout-align="start center"
-            *ngFor="let headcell of headerArr2; index as i"
-            [style.width]="colconfig2[i]"
-          >
-            {{ headcell.title }}
-          </div>
+    <div
+      class="row"
+      layout="row"
+      layout-align="start center"
+      style="height: 50px"
+    >
+      <h5 class="fs16 fw600 primColor">Federal Credit Union</h5>
+    </div>
+    <div class="row" style="height: 282px">
+      <div class="tableHead tableTitle h40" style="width: 100%">
+        <div
+          class="col label fw600 secColor"
+          layout="row"
+          layout-align="start center"
+          *ngFor="let headcell of headerArr2; index as i"
+          [style.width]="colconfig2[i]"
+        >
+          {{ headcell.title }}
+        </div>
       </div>
       <div class="tableBody">
-        <div class="tableRow borderLR" style="height: 46px;" *ngFor="let item of bankCheks">
         <div
-              class="tableCell label fw500 col"
-              layout="row"
-              layout-align="center center"
-              [style.width]="colconfig2[0]"
-            >
-              <span style="background-color: #34973e; border-radius: 50%; width: 18px;height: 18px;"></span>
-            </div>
-            <div
-              class="tableCell label fw500 col"
-              layout="row"
-              layout-align="start center"
-              [style.width]="colconfig2[1]"
-            >
-            {{item}}
-            </div>
-            </div>
+          class="tableRow borderLR"
+          style="height: 46px"
+          *ngFor="let item of bankCheks"
+        >
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="center center"
+            [style.width]="colconfig2[0]"
+          >
+            <span
+              style="
+                background-color: #34973e;
+                border-radius: 50%;
+                width: 18px;
+                height: 18px;
+              "
+            ></span>
+          </div>
+          <div
+            class="tableCell label fw500 col"
+            layout="row"
+            layout-align="start center"
+            [style.width]="colconfig2[1]"
+          >
+            {{ item }}
+          </div>
+        </div>
       </div>
     </div>
-  
-    <div class="row pb20" layout="row" layout-align="end end" style="height: 101px;">
+
+    <div
+      class="row pb20"
+      layout="row"
+      layout-align="end end"
+      style="height: 101px"
+    >
       <div (click)="next(3)">
         <h5 class="fs16 fw600 primColor">Next</h5>
-        <img class="hw20" src="/assets/icons/arrow_next.svg">
+        <img class="hw20" src="/assets/icons/arrow_next.svg" />
       </div>
     </div>
- </div>
- </div>
+  </div>
+</div>
 
- <div class="col" *ngIf="!dataReceivedFlag" layout="column" layout-align="center center" >
-    <div class="fs20 fw400 textPC" style="text-align: center;">Please wait...</div>
-    <div class="loading-spinner mt30"></div>
- </div>
-
-
+<div
+  class="col"
+  *ngIf="!dataReceivedFlag"
+  layout="column"
+  layout-align="center center"
+>
+  <div class="fs20 fw400 textPC" style="text-align: center">Please wait...</div>
+  <div class="loading-spinner mt30"></div>
+</div>

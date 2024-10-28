@@ -1,18 +1,17 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { DocRequest } from "../../../models/type";
-import { FormErrorHandler } from "../../../validators/form-error-handler";
+import { DocRequest } from '../../../models/type';
+import { FormErrorHandler } from '../../../validators/form-error-handler';
 
-
-import { Subject, takeUntil } from "rxjs";
-import { PanState } from "../../../models/kyc";
-import { DocAPIService } from "../../../services/doc-api.service";
+import { Subject, takeUntil } from 'rxjs';
+import { PanState } from '../../../models/kyc';
+import { DocAPIService } from '../../../services/doc-api.service';
 
 @Component({
   selector: 'app-pan',
   templateUrl: './pan.component.html',
-  styleUrl: './pan.component.css'
+  styleUrl: './pan.component.css',
 })
 export class PanComponent {
   @Output() callback = new EventEmitter();
@@ -24,14 +23,11 @@ export class PanComponent {
   isLoading: boolean = false;
   loadingMsg: boolean = false;
   panForm: FormGroup;
-  panDetails!: PanState
-  constructor(
-    private fb: FormBuilder,
-    private docService: DocAPIService,
-  ) {
+  panDetails!: PanState;
+  constructor(private fb: FormBuilder, private docService: DocAPIService) {
     this.panForm = this.fb.group({
       panNumber: [
-        "",
+        '',
         // [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")],
         [Validators.required],
       ],
@@ -39,10 +35,10 @@ export class PanComponent {
   }
 
   ngOnInit(): void {
-    this.panForm.controls["panNumber"].valueChanges.subscribe((value) => {
+    this.panForm.controls['panNumber'].valueChanges.subscribe((value) => {
       const uppercasedValue = value.toUpperCase();
       if (value !== uppercasedValue) {
-        this.panForm.controls["panNumber"].setValue(uppercasedValue, {
+        this.panForm.controls['panNumber'].setValue(uppercasedValue, {
           emitEvent: false,
         });
       }
@@ -50,7 +46,7 @@ export class PanComponent {
   }
 
   back(): void {
-    this.callback.emit({ type: "close" });
+    this.callback.emit({ type: 'close' });
   }
   getPanDetails(reqParam: DocRequest): void {
     // this.docService
@@ -81,7 +77,7 @@ export class PanComponent {
     this.isSubmitted = true;
     Object.keys(this.panForm.controls).forEach((key) => {
       const control = this.panForm.get(key);
-      if (control && typeof control.value === "string") {
+      if (control && typeof control.value === 'string') {
         control.setValue(control.value.trim());
       }
     });
@@ -90,29 +86,28 @@ export class PanComponent {
       this.loadingMsg = true;
     }
   }
-panNumber!: string 
+  panNumber!: string;
 
-  fetchPan(){
+  fetchPan() {
     const formValue = this.panForm.getRawValue();
-      this.panNumber = formValue.panNumber;
-      const panObj = {
-         'panNumber': this.panNumber
-      }
+    this.panNumber = formValue.panNumber;
+    const panObj = {
+      panNumber: this.panNumber,
+    };
 
-    this.docService.getPanDetails( panObj ).subscribe(
+    this.docService.getPanDetails(panObj).subscribe(
       (response) => {
         if (response) {
           this.panDetails = response.data.state.pan;
-          this.panInfo.emit(this.panDetails)
+          this.panInfo.emit(this.panDetails);
           this.callback.emit({
-            type: "close",
+            type: 'close',
           });
         }
       },
       (error) => {
-        console.log(error, "errorrrrrrrrrrr");
-      },
+        console.log(error, 'error');
+      }
     );
   }
 }
-

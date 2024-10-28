@@ -22,7 +22,6 @@ export class QuotationHomeComponent {
   
 
   ngOnInit(){
-    console.log(this.fileFlag, "console")
      this.dataEntries = Object.entries(this.checkObj);
   }
 
@@ -31,9 +30,6 @@ export class QuotationHomeComponent {
   }
 
   fileUpload(iFlag: boolean): void {
-    console.log(iFlag, "iFlag");
-    
       this.fileFlag = iFlag
-      console.log(this.fileFlag, "fileFlag")
   }
 }

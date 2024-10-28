@@ -1,24 +1,31 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from "@angular/core";
-import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { Subject, takeUntil } from "rxjs";
-import { BlockStatus } from "../../../models/type";
-import { File, FileState } from "../../../models/bank";
-import { CourierService } from "../../../services/courier.service";
-import { DocumentService } from "../../../services/documentservice";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Subject, takeUntil } from 'rxjs';
+import { BlockStatus } from '../../../models/type';
+import { File, FileState } from '../../../models/bank';
+import { CourierService } from '../../../services/courier.service';
+import { DocumentService } from '../../../services/documentservice';
 
 @Component({
-  selector: "app-upload",
-  templateUrl: "./upload.component.html",
-  styleUrl: "./upload.component.css",
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrl: './upload.component.css',
 })
 export class UploadComponent {
   constructor(
     private sanitizer: DomSanitizer,
     private documentService: DocumentService,
-    private courierService: CourierService,
+    private courierService: CourierService
   ) {}
 
-  @ViewChild("fileInput") fileInput!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   private destroy$ = new Subject<void>();
   private objectUrl: string | null = null;
@@ -30,7 +37,7 @@ export class UploadComponent {
   }
 
   onFileSelected(event: Event): void {
-         this.fileFlag.emit(true)
+    this.fileFlag.emit(true);
 
     // const input = event.target as HTMLInputElement;
     // if (input.files && input.files.length > 0) {
@@ -50,11 +57,11 @@ export class UploadComponent {
     const reader = new FileReader();
     reader.onload = () => {
       const unsafePdfUrl = reader.result as ArrayBuffer;
-      const blob = new Blob([unsafePdfUrl], { type: "application/pdf" });
+      const blob = new Blob([unsafePdfUrl], { type: 'application/pdf' });
       this.objectUrl = URL.createObjectURL(blob);
 
       this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-        this.objectUrl,
+        this.objectUrl
       );
     };
     reader.readAsArrayBuffer(file);
@@ -87,11 +94,11 @@ export class UploadComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (file: File) => {
-            if (this.block) this.block.state["file"] = file;
+            if (this.block) this.block.state['file'] = file;
             this.courierService.notifyOther({
               file: file,
             });
-            this.fileFlag.emit(true)
+            this.fileFlag.emit(true);
           },
         });
     }

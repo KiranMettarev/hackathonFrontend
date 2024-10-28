@@ -8,14 +8,11 @@ import {
   AfterViewInit,
   OnInit,
   OnDestroy,
-} from "@angular/core";
-import {
-  Analysis,
-  BankStatementAnalysisStatus,
-} from "../../../models/bank";
-import { Subject, takeUntil } from "rxjs";
-import { LoadingService } from "../../../services/loadingService";
-import { DocAPIService } from "../../../services/doc-api.service";
+} from '@angular/core';
+import { Analysis, BankStatementAnalysisStatus } from '../../../models/bank';
+import { Subject, takeUntil } from 'rxjs';
+import { LoadingService } from '../../../services/loadingService';
+import { DocAPIService } from '../../../services/doc-api.service';
 
 import {
   AbstractControl,
@@ -23,25 +20,25 @@ import {
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { StringOrNull } from "../../../models/user-details";
-import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { mobileNumberValidator } from "../../../validators/custom-validation";
+} from '@angular/forms';
+import { StringOrNull } from '../../../models/user-details';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { mobileNumberValidator } from '../../../validators/custom-validation';
 export type ConsentResponse = {
   consentHandleId: string;
   url: string;
   status: BankStatementAnalysisStatus;
 };
 @Component({
-  selector: "app-aa-integration",
-  templateUrl: "./aa-integration.component.html",
-  styleUrl: "./aa-integration.component.css",
+  selector: 'app-aa-integration',
+  templateUrl: './aa-integration.component.html',
+  styleUrl: './aa-integration.component.css',
 })
 export class AaIntegrationComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
-  @ViewChild("iframe") iframeRef!: ElementRef;
-  @ViewChild("fileInput") fileInput!: ElementRef;
+  @ViewChild('iframe') iframeRef!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   @Input() isError = false;
   @Input() errorMessages: { [key: string]: string } = {};
@@ -62,20 +59,19 @@ export class AaIntegrationComponent
     private fb: FormBuilder,
     private docAPIService: DocAPIService,
     private loadingService: LoadingService,
-    private sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer
   ) {
     this.contactNoForm = this.fb.group({
-      mobNumber: ["", [Validators.required, mobileNumberValidator]],
+      mobNumber: ['', [Validators.required, mobileNumberValidator]],
     });
   }
   showIframe: boolean = false;
   baseUrl!: SafeResourceUrl;
-  previousUrl: string = "";
+  previousUrl: string = '';
   aaRequestData!: Analysis;
   contactNoForm: FormGroup<{ mobNumber: FormControl<StringOrNull> }>;
 
   ngOnInit(): void {
-     
     this.loadingService.loadingState
       .pipe(takeUntil(this.destroy$))
       .subscribe((isLoading) => (this.isLoading = isLoading));
@@ -97,34 +93,33 @@ export class AaIntegrationComponent
       return;
     }
 
-    const mobileNumber = this.f["mobNumber"].value;
+    const mobileNumber = this.f['mobNumber'].value;
 
     this.docAPIService
       .consentAAData({ mobileNumber: mobileNumber })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (block: any) => {
-
-          console.log("Fetched block:", block);
+          console.log('Fetched block:', block);
 
           const data = block.body;
           this.baseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            data.url!,
+            data.url!
           );
-          console.log("Base URL set:", this.baseUrl);
+          // console.log("Base URL set:", this.baseUrl);
           this.showIframe = true;
           this.previousUrl = this.baseUrl as string;
           setTimeout(() => {
             if (this.iframeRef) {
               this.aaRequestData = data.analysis;
               this.monitorIframeUrlChange();
-               this.aaFetchFlag.emit(true)
+              this.aaFetchFlag.emit(true);
             }
           }, 100);
         },
         error: (err) => {
-          console.error("Error fetching data:", err);
-          this.aaFetchFlag.emit(false)
+          console.error('Error fetching data:', err);
+          this.aaFetchFlag.emit(false);
         },
       });
     this.formSubmitCall = false;
@@ -134,9 +129,9 @@ export class AaIntegrationComponent
     const iframe: HTMLIFrameElement = this.iframeRef.nativeElement;
     iframe.onload = () => {
       iframe.onload = () => {
-        console.log("Iframe loaded with URL:", iframe.src);
+        // console.log("Iframe loaded with URL:", iframe.src);
         if (iframe.src !== this.previousUrl) {
-          console.log("Iframe URL changed:", iframe.src);
+          // console.log("Iframe URL changed:", iframe.src);
           this.closeIframe();
         }
         this.previousUrl = iframe.src;
@@ -161,9 +156,9 @@ export class AaIntegrationComponent
 
   closeIframe(): void {
     this.showIframe = false;
-    this.aaFetchFlag.emit(false)
+    this.aaFetchFlag.emit(false);
     this.callback.emit({
-      type: "close",
+      type: 'close',
       // data: this.aaRequestData,
     });
   }
@@ -171,11 +166,11 @@ export class AaIntegrationComponent
   clearLoadingTimeout(): void {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
-      this.timeoutId = null; 
+      this.timeoutId = null;
     }
   }
   back(): void {
-    this.callback.emit({ type: "close" });
+    this.callback.emit({ type: 'close' });
   }
 
   ngOnDestroy(): void {
@@ -183,4 +178,3 @@ export class AaIntegrationComponent
     this.destroy$.complete();
   }
 }
-

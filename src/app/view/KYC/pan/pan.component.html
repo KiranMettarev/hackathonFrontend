@@ -2,7 +2,11 @@
   <div class="addCase">
     <div class="row" layout="row" layout-align="space-between center">
       <h5 class="heading fw600 primColor">Verify PAN Card</h5>
-      <img class="pt hw18" src="/assets/icons/close_blue.svg" (click)="back()" />
+      <img
+        class="pt hw18"
+        src="/assets/icons/close_blue.svg"
+        (click)="back()"
+      />
     </div>
     <div class="row mt40" layout="row" layout-align="start center">
       <p class="label fw400 secColor">Enter PAN Number of the Applicant.</p>
@@ -44,11 +48,7 @@
                 {{ errorMessages["form"] }}
               </small>
             </div>
-            <button
-              type="submit"
-              class="button mt40"
-              *ngIf="!isLoading"
-              >
+            <button type="submit" class="button mt40" *ngIf="!isLoading">
               Fetch Details
             </button>
             <!-- [disabled]="panForm.invalid" -->

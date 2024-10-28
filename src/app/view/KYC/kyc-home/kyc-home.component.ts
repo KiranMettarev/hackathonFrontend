@@ -37,19 +37,14 @@ export class KycHomeComponent {
   aadhaarInfo(adhar: AadhaarDetails): void {
     this.adharDetails = adhar
     this.aadhaarDataFlag = true
-    console.log(adhar, "workAdhar");
-    
   }
 
   panInfo(pan: PanDetails): void {
      this.panDetails = pan
     this.panDataFlag = true
-    console.log(pan, "workPan");
   }
 
   callBack(iVal: CallBackEvent): void {
-    console.log(iVal, "ivalAdhar");
-    
     this.aadharFlag = false
     this.panFlag = false
   }

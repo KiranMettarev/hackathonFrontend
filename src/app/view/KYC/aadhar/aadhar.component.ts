@@ -1,27 +1,27 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { DocRequest } from "../../../models/type";
-import { StringOrNull } from "../../../models/user-details";
-import { DocAPIService } from "../../../services/doc-api.service";
-import { AdharState } from "../../../models/kyc";
-import { interval, Subscription, take } from "rxjs";
-import { FormErrorHandler } from "../../../validators/form-error-handler";
+} from '@angular/forms';
+import { DocRequest } from '../../../models/type';
+import { StringOrNull } from '../../../models/user-details';
+import { DocAPIService } from '../../../services/doc-api.service';
+import { AdharState } from '../../../models/kyc';
+import { interval, Subscription, take } from 'rxjs';
+import { FormErrorHandler } from '../../../validators/form-error-handler';
 
 @Component({
   selector: 'app-aadhar',
   templateUrl: './aadhar.component.html',
-  styleUrl: './aadhar.component.css'
+  styleUrl: './aadhar.component.css',
 })
 export class AadharComponent {
   @Output() callback = new EventEmitter();
   @Output() aadhaarInfo = new EventEmitter();
   back(): void {
-    this.callback.emit({ type: "close" });
+    this.callback.emit({ type: 'close' });
   }
   aadhaarForm!: FormGroup<{ adhaarNumber: FormControl<StringOrNull> }>;
   otpForm!: FormGroup;
@@ -30,61 +30,55 @@ export class AadharComponent {
   resendOtpEnabled = false;
   countdown = 60;
   countdownSubscription!: Subscription;
-  adhaarNumber: StringOrNull = "";
+  adhaarNumber: StringOrNull = '';
   errorMessages: { [key: string]: string } = {};
   isSubmitted: boolean = false;
   isAlphabetFlag: boolean = false;
   isLoading: boolean = false;
   loadingMsg: boolean = false;
-  constructor(
-    private fb: FormBuilder,
-    private docService: DocAPIService,
-  ) {}
+  constructor(private fb: FormBuilder, private docService: DocAPIService) {}
 
   ngOnInit(): void {
     this.aadhaarForm = this.fb.group({
       adhaarNumber: [
-        "",
-        [Validators.required, Validators.pattern("^[2-9]{1}[0-9]{11}$")],
+        '',
+        [Validators.required, Validators.pattern('^[2-9]{1}[0-9]{11}$')],
       ],
     });
 
     this.otpForm = this.fb.group({
       otp: [
-        "",
+        '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)],
       ],
     });
   }
 
-  fetchAadhar(){
+  fetchAadhar() {
     const formValue = this.aadhaarForm.getRawValue();
-      this.adhaarNumber = formValue.adhaarNumber;
-      const adharObj = {
-         'adharNumber': this.adhaarNumber
-      }
+    this.adhaarNumber = formValue.adhaarNumber;
+    const adharObj = {
+      adharNumber: this.adhaarNumber,
+    };
 
-    this.docService.getAadhar( adharObj ).subscribe(
+    this.docService.getAadhar(adharObj).subscribe(
       (response) => {
         if (response) {
           this.aadhaarDetails = response.data.adharState.aadhar;
-          this.aadhaarInfo.emit(this.aadhaarDetails)
-          console.log(this.aadhaarDetails, "---------")
-        
-
+          this.aadhaarInfo.emit(this.aadhaarDetails);
           this.callback.emit({
-            type: "close",
+            type: 'close',
           });
         }
       },
       (error) => {
         this.errorMessages = FormErrorHandler.handleServerErrors(
           error,
-          this.otpForm,
+          this.otpForm
         );
         this.isLoading = false;
         this.loadingMsg = false;
-      },
+      }
     );
   }
 
@@ -108,12 +102,12 @@ export class AadharComponent {
         (error) => {
           this.errorMessages = FormErrorHandler.handleServerErrors(
             error,
-            this.aadhaarForm,
+            this.aadhaarForm
           );
           this.otpSent = false;
           this.isLoading = false;
           this.loadingMsg = false;
-        },
+        }
       );
     }
   }
@@ -158,4 +152,3 @@ export class AadharComponent {
     }
   }
 }
-
