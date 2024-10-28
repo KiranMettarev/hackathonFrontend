@@ -70,27 +70,29 @@ export class AnalysisComponent {
   constructor(private docAPIService: DocAPIService) {}
 
   ngOnInit(): void {
-    //   for (let i = 0; i < 5; i++) {
-    //  if(!this.dataReceivedFlag){
-    //    setTimeout(() => this.ConsentStatus(), i * 5000);
-    //  }
-    // }
+      for (let i = 0; i < 3; i++) {
+     if(!this.dataReceivedFlag){
+       setTimeout(() => this.ConsentStatus(), i * 5000);
+     }
+    }
 
     //  console.log(this.sampleData, "sampleData")
-    this.data = JSON.parse(this.sampleData.content[0].text);
-    console.log(this.data, 'data');
+    //  ---------------------------------------
+    // this.data = JSON.parse(this.sampleData.content[0].text);
+    // console.log(this.data, 'data');
 
-    if (this.data.monthlySummary.length > 0) {
-      this.dataReceivedFlag = true;
-      this.calculateData();
-      this.calculateArrValues();
+    // if (this.data.monthlySummary.length > 0) {
+    //   this.dataReceivedFlag = true;
+    //   this.calculateData();
+    //   this.calculateArrValues();
 
-      setTimeout(() => {
-        this.initChartData();
-      }, 1000);
-    } else {
-      console.log('Error');
-    }
+    //   setTimeout(() => {
+    //     this.initChartData();
+    //   }, 1000);
+    // } else {
+    //   console.log('Error');
+    // }
+    // ------------------------
   }
 
   ConsentStatus(): void {
@@ -101,6 +103,7 @@ export class AnalysisComponent {
         next: (data: any) => {
           console.log(data, 'Consent - data from Finvu');
           this.data = JSON.parse(this.sampleData.content[0].text);
+          console.log(this.data, "data")
 
           if (this.data.monthlySummary.length > 0) {
             this.dataReceivedFlag = true;
@@ -150,6 +153,7 @@ export class AnalysisComponent {
     };
 
     this.bankDetails = Object.entries(financialSummary);
+    console.log(this.bankDetails, "bankDetails")
   }
 
   calculateArrValues(): void {
@@ -183,17 +187,17 @@ export class AnalysisComponent {
         {
           name: 'Total Debit',
           // data: ['81578.5', '81862.14', '705768.97', '279885.39','78501.18', '144600.03', '0']
-          data: this.totalDebitArr,
+          data: this.totalDebitArr.slice().reverse(),
         },
         {
           name: 'Total Credit',
           // data: ['81703.25', '130483', '949453', '1819','65811', '228708', '306']
-          data: this.totalCreditArr,
+          data: this.totalCreditArr.slice().reverse(),
         },
         {
           name: 'Average Monthly Balances',
           // data: ['604.57', '49225.43', '292909.46', '14843.07','2152.89', '86260.86', '86566.86']
-          data: this.averageMonthlyBalancesArr,
+          data: this.averageMonthlyBalancesArr.slice().reverse(),
         },
       ],
       chart: {
@@ -265,7 +269,7 @@ export class AnalysisComponent {
           rotate: -45,
         },
         // categories: ["Oct 2022", "Nov 2022", "Dec 2022", "Jan 2023","Feb 2023", "Mar 2023", "Apr 2023"],
-        categories: this.monthsArr,
+        categories: this.monthsArr.slice().reverse(),
       },
       tooltip: {
         // y: {

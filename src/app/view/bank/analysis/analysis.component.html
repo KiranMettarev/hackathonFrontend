@@ -69,10 +69,10 @@
             <div
               class="tableCell label fw500 col"
               layout="row"
-              layout-align="start center"
+              layout-align="end center"
               [style.width]="colconfig1[1]"
             >
-              {{ item[1] | number : "1.2-2" }}
+             ₹ {{ item[1] | number : "1.2-2" }}
             </div>
           </div>
         </div>
@@ -153,6 +153,14 @@
   layout="column"
   layout-align="center center"
 >
-  <div class="fs20 fw400 textPC" style="text-align: center">Please wait...</div>
-  <div class="loading-spinner mt30"></div>
+  <!-- <div class="fs20 fw400 textPC" style="text-align: center">Please wait...</div>
+  <div class="loading-spinner mt30"></div> -->
+
+   <div class="row" style="height: 300px;background-color: #ffffff; padding: 0 20px; margin-top: 80px;" layout="column"
+  layout-align="center center">
+    <h5 class="fs20 fw400 textPC" style="text-align: center">
+   Please wait...
+  </h5>
+  <span class="loading-spinner mt30"></span>
+  </div>
 </div>

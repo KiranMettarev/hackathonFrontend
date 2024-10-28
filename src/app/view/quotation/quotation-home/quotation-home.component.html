@@ -16,7 +16,7 @@
   <div class="col pad15" style="background-color: #ffffff">
     <h5 class="row primColor fs16 fw600 h40">Uploaded Quotation</h5>
     <img class="row" style="height: 370px" src="assets/icons/Quotation.webp" />
-    <h5 class="row mt20 textPC fs16 fw400 h40">Validate Quotation to proceed Further</h5>
+    <h5 class="row mt20 textPC fs16 fw400 h40">Validate Quotation to proceed further</h5>
   </div>
 
   <div
@@ -32,42 +32,42 @@
 </div>
 
 <div class="row" *ngIf="validationFlag">
-  <div class="row" style="background-color: #ffffff; height: 320px">
+  <div class="row" style="background-color: #ffffff; height: 280px">
     <div
       class="row padt20"
       layout="column"
       layout-align="start center"
-      style="gap: 10px; height: 70px"
+      style="gap: 10px; height: 40px"
     >
-      <h5 class="fs16 fw500 primColor">Quotation validation</h5>
-      <h5 class="fs14 fw400 textPC">Your Quotation validate successfuly</h5>
+      <h5 class="fs16 fw500 primColor">Quotation Validated Successfully</h5>
+      <!-- <h5 class="fs14 fw400 textPC">Your Quotation validate successfuly</h5> -->
     </div>
 
-    <div class="mt20 row" style="height: calc(100% -70px)">
+    <div class="mt20 row" style="height: calc(100% -40px)">
       <div class="tableHead h40">
         <div
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: 40%"
+          style="width: 120px"
         >
-          Upload
+          Field
         </div>
         <div
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: 40%"
+          style="width: 120px"
         >
-          Validate
+          Value
         </div>
         <div
           class="tableCell label fw500 col"
           layout="row"
           layout-align="start center"
-          style="width: 20%"
+          style="width: calc(100% - 240px)"
         >
-          Check
+          Validation
         </div>
       </div>
       <div class="tableBody">
@@ -80,7 +80,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="start center"
-            style="width: 40%"
+            style="width: 120px"
           >
             {{ item[0] }}
           </div>
@@ -89,7 +89,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="start center"
-            style="width: 40%"
+            style="width: 120px"
           >
             {{ item[1] }}
           </div>
@@ -97,7 +97,7 @@
             class="tableCell label fw500 col"
             layout="row"
             layout-align="center center"
-            style="width: 20%"
+            style="width: calc(100% - 240px)"
           >
             <img src="assets/icons/check_circle.svg" />
           </div>
