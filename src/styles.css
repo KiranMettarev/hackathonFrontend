@@ -573,8 +573,9 @@ select {
 }
 
 button:disabled {
-  background-color: #cccccc;
+  /* background-color: #cccccc; */
   cursor: not-allowed;
+  opacity:50%;
 }
 .disabled-input {
   background-color: #f0f0f0;
