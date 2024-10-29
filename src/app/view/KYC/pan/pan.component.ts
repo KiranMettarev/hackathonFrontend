@@ -2,9 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DocRequest } from '../../../models/type';
-import { FormErrorHandler } from '../../../validators/form-error-handler';
 
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PanState } from '../../../models/kyc';
 import { DocAPIService } from '../../../services/doc-api.service';
 
@@ -28,7 +27,7 @@ export class PanComponent {
     this.panForm = this.fb.group({
       panNumber: [
         '',
-        // [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")],
+        [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")],
         [Validators.required],
       ],
     });

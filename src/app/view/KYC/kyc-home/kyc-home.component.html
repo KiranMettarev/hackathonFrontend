@@ -66,7 +66,7 @@
     </div>
   </div>
   <div class="row pb20" layout="row" layout-align="end center" style="height: 101px;">
-    <div (click)="next(2)">
+    <div (click)="next(2)" [ngClass]="{ blur: !aadhaarDataFlag || !panDataFlag }">
       <h5 class="fs16 fw600 primColor">Next</h5>
       <img class="hw20" src="/assets/icons/arrow_next.svg">
     </div>
