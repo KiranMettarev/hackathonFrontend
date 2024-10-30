@@ -70,11 +70,12 @@ export class AnalysisComponent {
   constructor(private docAPIService: DocAPIService) {}
 
   ngOnInit(): void {
-      for (let i = 0; i < 3; i++) {
-     if(!this.dataReceivedFlag){
-       setTimeout(() => this.ConsentStatus(), i * 5000);
-     }
-    }
+    //   for (let i = 0; i < 3; i++) {
+    //  if(!this.dataReceivedFlag){
+    //    setTimeout(() => this.ConsentStatus(), i * 5000);
+    //  }
+    // }
+    this.ConsentStatus()
 
     //  console.log(this.sampleData, "sampleData")
     //  ---------------------------------------
@@ -103,9 +104,17 @@ export class AnalysisComponent {
       .subscribe({
         next: (data: any) => {
           console.log(data, 'Consent - data from Finvu');
-          // this.data = JSON.parse(this.sampleData.content[0].text);
-          this.data = JSON.parse(data.content[0].text);
-          console.log(this.data, "data")
+          try {
+          const initialParsedData = JSON.parse(data.data);
+          console.log("1-Final Output",initialParsedData);
+           this.data = JSON.parse(initialParsedData.content[0].text);
+            console.log("Only Data",data);
+
+        } catch (error) {
+          console.error("Parsing error:", error);
+        }
+          // this.data = JSON.parse(data.data.text);
+          // console.log(this.data, "data")
 
           if (this.data.monthlySummary.length > 0) {
             this.dataReceivedFlag = true;
