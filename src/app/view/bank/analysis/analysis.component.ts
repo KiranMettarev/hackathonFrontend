@@ -59,7 +59,7 @@ export class AnalysisComponent {
   headerArr1: Header[] = [
     // { title: "Rank", key: "rank" },
     { title: 'Category', key: 'category' },
-    { title: 'Amount in ₹', key: 'amount' },
+    { title: 'Amount', key: 'amount' },
   ];
 
   headerArr2: Header[] = [
