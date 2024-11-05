@@ -104,15 +104,18 @@ export class AnalysisComponent {
       .subscribe({
         next: (data: any) => {
           console.log(data, 'Consent - data from Finvu');
-          try {
-          const initialParsedData = JSON.parse(data.data);
-          console.log("1-Final Output",initialParsedData);
-           this.data = JSON.parse(initialParsedData.content[0].text);
-            console.log("Only Data",data);
-
-        } catch (error) {
-          console.error("Parsing error:", error);
-        }
+          if(data.data === "PENDING"){
+            // setTimeout(() => this.ConsentStatus(), 10000);
+          }else{
+              try {
+              const initialParsedData = JSON.parse(data.data);
+              console.log("1-Final Output",initialParsedData);
+              this.data = JSON.parse(initialParsedData.content[0].text);
+                console.log("Only Data",data);
+                this.dataReceivedFlag = true;
+            } catch (error) {
+              console.error("Parsing error:", error);
+            }
           // this.data = JSON.parse(data.data.text);
           // console.log(this.data, "data")
 
@@ -127,6 +130,7 @@ export class AnalysisComponent {
           } else {
             console.log('Error');
           }
+        }
         },
         error: (err) => {
           console.error('Error fetching data:', err);
