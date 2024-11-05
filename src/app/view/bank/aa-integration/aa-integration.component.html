@@ -20,7 +20,7 @@
             Please note that for adding an account through aggregator,<span
               style="color: var(--error)"
             >
-              User must give consent</span
+              client must give consent</span
             >
             to sharing their account details with aggregator.
           </p>
@@ -30,7 +30,7 @@
           <form [formGroup]="contactNoForm">
             <div class="row mt40" layout="column" layout-align="start center">
               <div class="row" layout="column" layout-align="start start">
-                <label class="required mb5">Mobile Number</label>
+                <label class="primColor fs14 fw500 required mb5">Mobile Number</label>
                 <input
                   class="textInput"
                   formControlName="mobNumber"
@@ -85,7 +85,7 @@
         <div *ngIf="!showIframe && !isLoading">
           <button
             type="button"
-            class="button mt40"
+            class="button mt40 fs14 fw700"
             [disabled]="contactNoForm.invalid"
             (click)="giveConsent()"
           >

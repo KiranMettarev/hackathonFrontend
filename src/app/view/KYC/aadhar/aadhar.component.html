@@ -19,7 +19,7 @@
       >
         <div class="row mt40" layout="column" layout-align="start center">
           <div class="row" layout="column" layout-align="start start">
-            <label for="adhaarNumber" class="required mb5"
+            <label for="adhaarNumber" class="primColor fs14 fw500 required mb5"
               >Aadhaar Number:</label
             >
             <input
@@ -67,7 +67,7 @@
             </div>
             <button
               type="submit"
-              class="button mt40"
+              class="button fs14 mt40"
               [disabled]="aadhaarForm.invalid"
               *ngIf="!otpSent && !isLoading"
             >

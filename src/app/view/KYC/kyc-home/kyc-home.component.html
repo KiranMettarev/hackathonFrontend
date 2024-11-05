@@ -1,10 +1,10 @@
  <div>
   <div class="row h155 card" *ngIf="!aadhaarDataFlag" layout="column" layout-align="center center" style="gap: 20px;">
       <div class="h42 labelPadding fs16 fw600" layout="column" layout-align="center center" style="gap: 10px;">
-        <h5 class="fs16 fw600 primColor">Aadhar</h5>
+        <h5 class="fs16 fw600 primColor">Aadhaar</h5>
         <h5 class="fs14 fw400 secColor">Fetch your Aadhar details online</h5>
       </div>
-      <button class="button label fw600 h41" style="width:150px;" (click)="fetchKYC('aadhar')">Fetch Online</button>
+      <button class="button label fw600 h41" style="width:135px;" (click)="fetchKYC('aadhar')">Fetch Online</button>
   </div>
 
   <div class="row card pad10" *ngIf="aadhaarDataFlag" layout="column" layout-align="start start" style="gap: 10px;  height: auto;">
@@ -38,7 +38,7 @@
         <h5 class="fs16 fw600 primColor">PAN</h5>
         <h5 class="fs14 fw400 secColor">Fetch your PAN details online</h5>
       </div>
-      <button class="button label fw600 h41" style="width:150px;" (click)="fetchKYC('pan')">Fetch Online</button>
+      <button class="button label fw600 h41" style="width:135px;" (click)="fetchKYC('pan')">Fetch Online</button>
   </div>
 
   <div class="row card pad10 mt20" *ngIf="panDataFlag" layout="column" layout-align="start start" style="gap: 10px; height: auto;">

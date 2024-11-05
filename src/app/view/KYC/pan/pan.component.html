@@ -15,7 +15,7 @@
       <form [formGroup]="panForm" (ngSubmit)="fetchPan()">
         <div class="row mt40" layout="column" layout-align="start center">
           <div class="row" layout="column" layout-align="start start">
-            <label for="panNumber" class="required mb5">PAN Number:</label>
+            <label for="panNumber" class="primColor fs14 fw500 required mb5">PAN Number:</label>
             <input
               id="panNumber"
               class="textInput"
@@ -48,7 +48,7 @@
                 {{ errorMessages["form"] }}
               </small>
             </div>
-            <button type="submit" class="button mt40" *ngIf="!isLoading">
+            <button type="submit" class="button fs14 mt40" *ngIf="!isLoading">
               Fetch Details
             </button>
             <!-- [disabled]="panForm.invalid" -->
