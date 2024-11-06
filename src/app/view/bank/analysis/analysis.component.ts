@@ -33,7 +33,6 @@ export class AnalysisComponent {
   ];
 
   colconfig1: string[] = [
-    // "50px",
     'calc(100% - 150px)',
     '150px',
   ];
@@ -57,7 +56,6 @@ export class AnalysisComponent {
   };
 
   headerArr1: Header[] = [
-    // { title: "Rank", key: "rank" },
     { title: 'Category', key: 'category' },
     { title: 'Amount', key: 'amount' },
   ];
@@ -70,31 +68,7 @@ export class AnalysisComponent {
   constructor(private docAPIService: DocAPIService) {}
 
   ngOnInit(): void {
-    //   for (let i = 0; i < 3; i++) {
-    //  if(!this.dataReceivedFlag){
-    //    setTimeout(() => this.ConsentStatus(), i * 5000);
-    //  }
-    // }
     this.ConsentStatus()
-
-    //  console.log(this.sampleData, "sampleData")
-    //  ---------------------------------------
-    // this.data = JSON.parse(this.sampleData.content[0].text);
-    // // this.data = JSON.parse(this.sampleData2.data);
-    // console.log(this.data, 'data');
-
-    // if (this.data.monthlySummary.length > 0) {
-    //   this.dataReceivedFlag = true;
-    //   this.calculateData();
-    //   this.calculateArrValues();
-
-    //   setTimeout(() => {
-    //     this.initChartData();
-    //   }, 1000);
-    // } else {
-    //   console.log('Error');
-    // }
-    // ------------------------
   }
 
   ConsentStatus(): void {
@@ -103,24 +77,22 @@ export class AnalysisComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: any) => {
-          console.log(data, 'Consent - data from Finvu');
+          // console.log(data, 'Consent - data from Finvu');
           if(data.data === "PENDING"){
-            // setTimeout(() => this.ConsentStatus(), 10000);
+            setTimeout(() => this.ConsentStatus(), 5000);
           }else{
               try {
               const initialParsedData = JSON.parse(data.data);
-              console.log("1-Final Output",initialParsedData);
+              // console.log("1-Final Output",initialParsedData);
               this.data = JSON.parse(initialParsedData.content[0].text);
                 console.log("Only Data",data);
                 this.dataReceivedFlag = true;
             } catch (error) {
               console.error("Parsing error:", error);
             }
-          // this.data = JSON.parse(data.data.text);
-          // console.log(this.data, "data")
 
           if (this.data.monthlySummary.length > 0) {
-            this.dataReceivedFlag = true;
+            // this.dataReceivedFlag = true;
             this.calculateData();
             this.calculateArrValues();
 
@@ -134,7 +106,6 @@ export class AnalysisComponent {
         },
         error: (err) => {
           console.error('Error fetching data:', err);
-          // this.aaFetchFlag.emit(false)
         },
       });
   }
@@ -201,17 +172,14 @@ export class AnalysisComponent {
       series: [
         {
           name: 'Total Debit',
-          // data: ['81578.5', '81862.14', '705768.97', '279885.39','78501.18', '144600.03', '0']
           data: this.totalDebitArr.slice().reverse(),
         },
         {
           name: 'Total Credit',
-          // data: ['81703.25', '130483', '949453', '1819','65811', '228708', '306']
           data: this.totalCreditArr.slice().reverse(),
         },
         {
           name: 'Average Monthly Balances',
-          // data: ['604.57', '49225.43', '292909.46', '14843.07','2152.89', '86260.86', '86566.86']
           data: this.averageMonthlyBalancesArr.slice().reverse(),
         },
       ],
@@ -283,7 +251,6 @@ export class AnalysisComponent {
         labels: {
           rotate: -45,
         },
-        // categories: ["Oct 2022", "Nov 2022", "Dec 2022", "Jan 2023","Feb 2023", "Mar 2023", "Apr 2023"],
         categories: this.monthsArr.slice().reverse(),
       },
       tooltip: {

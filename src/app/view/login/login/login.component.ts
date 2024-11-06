@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   handleOtpChange(otp: string): void {
-    // console.log('Entered OTP: ', otp);
     this.otp = otp
   }
 
@@ -119,7 +118,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   verifyAndFetchDetails(): void {
-    // console.log(this.otp, "finalOTP-----")
      this.router.navigate(['user']);
 
      if (this.form.valid) {
